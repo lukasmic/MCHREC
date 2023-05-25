@@ -1,0 +1,30 @@
+/* Media Query for medium+ views */
+@media only screen and (min-width: 32.5em) {
+
+  /* hamburger */
+  #smallNav {display: none;}
+
+  nav ul#primaryNav {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  nav ul li a {
+    border: none;
+  }
+  /* end hamburger */
+
+  #card-results ul, #staple-results ul{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #card-results ul li, #staple-results ul li {
+    max-width: 99%;
+  }
+  
+  #about-body {
+    max-width: 80%;
+    margin: auto;
+  }
+}

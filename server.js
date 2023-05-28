@@ -1,7 +1,9 @@
-import { updateDeckData } from "./src/data-rips/data-rip.mjs";
+// import { updateDeckData } from "./src/data-rips/data-rip.mjs";
 import express from "express";
 import mysql from "mysql2";
 import dotenv from 'dotenv'; dotenv.config();
+
+import { updatePackData } from "./src/new_rips/packs.mjs";
 
 const app = express();
 
@@ -25,6 +27,15 @@ app.get('/test', (req, res) => {
     res.json(results);
   });
 });
+
+
+//here lies the gaggle of junk we need to do as new releases come out
+
+// updatePackData(connection);
+
+
+
+
 
 // async function insertRow() {
 //   const sql = 'INSERT INTO aspects (aspect_id, aspect_name) VALUES (?, ?)';
@@ -52,3 +63,21 @@ app.get('/test', (req, res) => {
 //     console.error(error);
 //     connection.close();
 //   });
+
+
+
+/*
+
+SQL - JSON
+master_code - code
+name - name
+subname(can be null) = subname
+card_type - type_code
+photo
+
+
+code - code
+pack_code - pack_code
+master_code - code
+
+*/

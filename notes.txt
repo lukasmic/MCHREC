@@ -1,0 +1,27 @@
+We have to keep in mind that the /public/cards/ API call only returns player deck card, including campaign cards.
+
+Therefore for completeness we will want to go through every single pack call in the API as well.
+
+All of the player cards are marked as we expect: "faction_code":"agg-basic, hero
+
+faction code "campaign" 
+
+faction_code:"encounter" represents both villain and module cards
+
+"card_set_type_name_code":"modular" for scenario, "villain" for encounter
+
+
+
+So it seems we have quite the decision tree for this crap
+
+First we check faction code.
+
+faction_code = "hero", dump into card version and master card
+
+faction_code = "agg" through "basic", check for "duplicate_of_code"
+  if exists, dump in card version and link to master
+  if not, dump in card version and master
+
+faction_code = "campaign", check value of "card_set_type_name_code"
+
+

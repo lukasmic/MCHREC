@@ -4,6 +4,7 @@ import mysql from "mysql2";
 import dotenv from 'dotenv'; dotenv.config();
 
 import { updatePackData } from "./src/new_rips/packs.mjs";
+import { updateCardData } from "./src/new_rips/cards.mjs";
 
 const app = express();
 
@@ -33,9 +34,25 @@ app.get('/test', (req, res) => {
 
 // updatePackData(connection);
 
+// updateCardData(connection, "core");
 
 
+//do not take this baby out of storage unless we need to repopulat the entire database
+//this will grab every card from every pack in the game and take several minutes
+//2463 worth of entries
 
+// updatePackData(connection)
+// .then(() => {
+//   const query = 'SELECT pack_code FROM packs';
+//   connection.query(query, (error, results) => {
+//     if (error) throw error;
+//     // Loop through results and call function for each pack code
+//     results.forEach((result) => {
+//       const packCode = result.pack_code;
+//       updateCardData(connection, packCode);
+//     });
+//   });
+// });
 
 // async function insertRow() {
 //   const sql = 'INSERT INTO aspects (aspect_id, aspect_name) VALUES (?, ?)';
@@ -80,4 +97,21 @@ code - code
 pack_code - pack_code
 master_code - code
 
+
+card_traits
+card_versions
+villain_cardlist
+modular_cardlist
+decks
+heroes
+
+ALTER TABLE master_cards MODIFY COLUMN master_code VARCHAR(10);
+ALTER TABLE card_traits MODIFY COLUMN master_code VARCHAR(10);
+ALTER TABLE card_versions MODIFY COLUMN master_code VARCHAR(10);
+ALTER TABLE villain_cardlist MODIFY COLUMN master_code VARCHAR(10);
+ALTER TABLE modular_cardlist MODIFY COLUMN master_code VARCHAR(10);
+ALTER TABLE decks MODIFY COLUMN master_code VARCHAR(10);
+ALTER TABLE heroes MODIFY COLUMN master_code VARCHAR(10);
+
 */
+

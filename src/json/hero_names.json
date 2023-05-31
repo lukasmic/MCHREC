@@ -1,86 +1,179 @@
 [{"code":"21031a",
-"heroname":"Adam Warlock"},
+"heroname":"Adam Warlock",
+"alter_ego": "Adam Warlock"},
 {"code":"12001a",
-"heroname":"Ant-Man"},
+"heroname":"Ant_Man",
+"alter_ego": "Scott Lang"},
 {"code":"01040a",
-"heroname":"Black Panther"},
+"heroname":"Black Panther",
+"alter_ego": "T'Challa"},
 {"code":"08001a",
-"heroname":"Black Widow"},
+"heroname":"Black Widow",
+"alter_ego": "Natasha Romanoff"},
 {"code":"03001a",
-"heroname":"Captain America"},
+"heroname":"Captain America",
+"alter_ego": "Steve Rogers"},
 {"code":"01010a",
-"heroname":"Captain Marvel"},
+"heroname":"Captain Marvel",
+"alter_ego": "Carol Danvers"},
 {"code":"32001a",
-"heroname":"Colossus"},
+"heroname":"Colossus",
+"alter_ego": "Piotr Rasputin"},
 {"code":"33001a",
-"heroname":"Cyclops"},
+"heroname":"Cyclops",
+"alter_ego": "Scott Summers"},
 {"code":"09001a",
-"heroname":"Doctor Strange"},
+"heroname":"Doctor Strange",
+"alter_ego": "Stephen Strange"},
 {"code":"19001a",
-"heroname":"Drax"},
+"heroname":"Drax",
+"alter_ego": "Drax"},
 {"code":"37001a",
-"heroname":"Gambit"},
+"heroname":"Gambit",
+"alter_ego": "Remy Lebeau"},
 {"code":"18001a",
-"heroname":"Gamora"},
+"heroname":"Gamora",
+"alter_ego": "Gamora"},
 {"code":"27001a",
-"heroname":"Ghost-Spider"},
+"heroname":"Ghost_Spider",
+"alter_ego": "Gwen Stacy"},
 {"code":"16001a",
-"heroname":"Groot"},
+"heroname":"Groot",
+"alter_ego": "Groot"},
 {"code":"04001a",
-"heroname":"Hawkeye"},
+"heroname":"Hawkeye",
+"alter_ego": "Clint Barton"},
 {"code":"10001a",
-"heroname":"Hulk"},
+"heroname":"Hulk",
+"alter_ego": "Bruce Banner"},
 {"code":"01029a",
-"heroname":"Iron Man"},
+"heroname":"Iron Man",
+"alter_ego": "Tony Stark"},
 {"code":"29001a",
-"heroname":"Ironheart"},
-{"code":"05001a",
-"heroname":"Ms. Marvel"},
-{"code":"22001a",
-"heroname":"Nebula"},
-{"code":"28001a",
-"heroname":"Nova"},
-{"code":"34001a",
-"heroname":"Phoenix"},
-{"code":"14001a",
-"heroname":"Quicksilver"},
-{"code":"16029a",
-"heroname":"Rocket Raccoon"},
-{"code":"38001a",
-"heroname":"Rogue"},
-{"code":"15001a",
-"heroname":"Scarlet Witch"},
-{"code":"32030a",
-"heroname":"Shadowcat"},
-{"code":"01019a",
-"heroname":"She-Hulk"},
-{"code":"31001a",
-"heroname":"SP//dr Suit"},
-{"code":"21001a",
-"heroname":"Spectrum"},
-{"code":"30001a",
-"heroname":"Spider-Ham"},
-{"code":"27030a",
-"heroname":"Spider-Man (Miles Morales)"},
-{"code":"01001a",
-"heroname":"Spider-Man (Peter Parker)"},
-{"code":"04031a",
-"heroname":"Spider-Woman"},
-{"code":"17001a",
-"heroname":"Star-Lord"},
-{"code":"36001a",
-"heroname":"Storm"},
-{"code":"06001a",
-"heroname":"Thor"},
-{"code":"25001a",
-"heroname":"Valkyrie"},
-{"code":"20001a",
-"heroname":"Venom"},
-{"code":"26001a",
-"heroname":"Vision"},
-{"code":"23001a",
-"heroname":"War Machine"},
-{"code":"13001a",
-"heroname":"Wasp"},
-{"code":"35001a",
-"heroname":"Wolverine"}]
+"heroname":"Ironheart",
+"alter_ego": "Riri Williams"},
+{
+  "code": "05001a",
+  "heroname": "Ms. Marvel",
+  "alter_ego": "Kamala Khan"
+},
+{
+  "code": "22001a",
+  "heroname": "Nebula",
+  "alter_ego": "Nebula"
+},
+{
+  "code": "28001a",
+  "heroname": "Nova",
+  "alter_ego": "Sam Alexander"
+},
+{
+  "code": "34001a",
+  "heroname": "Phoenix",
+  "alter_ego": "Jean Grey"
+},
+{
+  "code": "14001a",
+  "heroname": "Quicksilver",
+  "alter_ego": "Pietro Maximoff"
+},
+{
+  "code": "16029a",
+  "heroname": "Rocket Raccoon",
+  "alter_ego": "Rocket Raccoon"
+},
+{
+  "code": "38001a",
+  "heroname": "Rogue",
+  "alter_ego": "Anna Marie"
+},
+{
+  "code": "15001a",
+  "heroname": "Scarlet Witch",
+  "alter_ego": "Wanda Maximoff"
+},
+{
+  "code": "32030a",
+  "heroname": "Shadowcat",
+  "alter_ego": "Kitty Pride"
+},
+{
+  "code": "01019a",
+  "heroname": "She_Hulk",
+  "alter_ego": "Jennifer Walters"
+},
+{
+  "code": "31001a",
+  "heroname": "SP//dr Suit",
+  "alter_ego": "Peni Parker"
+},
+{
+  "code": "21001a",
+  "heroname": "Spectrum",
+  "alter_ego": "Monica Rambeau"
+},
+{
+  "code": "30001a",
+  "heroname": "Spider_Ham",
+  "alter_ego": "Peter Porker"
+},
+{
+  "code": "27030a",
+  "heroname": "Spider_Man (Miles Morales)",
+  "alter_ego": "Miles Morales"
+},
+{
+  "code": "01001a",
+  "heroname": "Spider_Man (Peter Parker)",
+  "alter_ego": "Peter Parker"
+},
+{
+  "code": "04031a",
+  "heroname": "Spider_Woman",
+  "alter_ego": "Jessica Drew"
+},
+{
+  "code": "17001a",
+  "heroname": "Star_Lord",
+  "alter_ego": "Peter Quill"
+},
+{
+  "code": "36001a",
+  "heroname": "Storm",
+  "alter_ego": "Ororo Munroe"
+},
+{
+  "code": "06001a",
+  "heroname": "Thor",
+  "alter_ego": "Odinson"
+},
+{
+  "code": "25001a",
+  "heroname": "Valkyrie",
+  "alter_ego": "Brunnhilde"
+},
+{
+  "code": "20001a",
+  "heroname": "Venom",
+  "alter_ego": "Flash Thompson"
+},
+{
+  "code": "26001a",
+  "heroname": "Vision",
+  "alter_ego": "Vision"
+},
+{
+  "code": "23001a",
+  "heroname": "War Machine",
+  "alter_ego": "James Rhodes"
+},
+{
+  "code": "13001a",
+  "heroname": "Wasp",
+  "alter_ego": "Nadia van Dyne"
+},
+{
+  "code": "35001a",
+  "heroname": "Wolverine",
+  "alter_ego": "Logan"
+}]

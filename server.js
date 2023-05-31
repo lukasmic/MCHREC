@@ -1,5 +1,6 @@
 // import { updatePackData } from "./src/new_rips/packs.mjs";
 // import { updateCardData } from "./src/new_rips/cards.mjs";
+// import { updateHeroData } from "./src/new_rips/heroes.mjs";
 import { ripDeckData } from "./src/new_rips/decks.mjs";
 import express from "express";
 import mysql from "mysql2";
@@ -30,7 +31,10 @@ app.get('/test', (req, res) => {
   });
 });
 
+
 ripDeckData(connection)
+
+
 
 
 //here lies the gaggle of junk we need to do as new releases come out
@@ -38,6 +42,9 @@ ripDeckData(connection)
 // updatePackData(connection);
 
 // updateCardData(connection, "core");
+
+//also will have to manually insert new heroes into hero_names.json (probably the only JSON we're keeping)
+// updateHeroData(connection);
 
 
 //do not take this baby out of storage unless we need to repopulate the entire database

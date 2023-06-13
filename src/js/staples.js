@@ -24,6 +24,15 @@ async function receiveClick() {
 
 
 async function displayStaples(aspect) {
+
+  const connection = mysql.createConnection({
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
+    port: process.env.MYSQL_PORT 
+  });
+
     //these are the decks of the chosen aspect
     const chosenDecks = [];
     // this is a nested list now therefore we're going to iterate by sublist (day)

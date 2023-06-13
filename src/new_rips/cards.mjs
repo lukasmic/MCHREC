@@ -2,13 +2,14 @@ import fetch from "node-fetch";
 
 // fill the packs table in the database
 export async function updateCardData(connection, pack) {
+  
   // we may need to change this make it an argument for the function
   fetch(`https://marvelcdb.com/api/public/cards/${pack}`)
   .then(response => response.json())
   .then(cards => {
 
     cards.forEach(card => {
-      const { code, pack_code, name, subname = null, type_code, imagesrc = null, text, faction_code, card_set_type_name_code = null, duplicate_of_code } = card;
+      const { code, pack_code, name, subname = null, type_code, imagesrc = null, text, faction_code, card_set_type_name_code = null, duplicate_of_code, url } = card;
     
       // query the aspects table to get the aspect_id
       const sql = `SELECT aspect_id FROM aspects WHERE aspect_name = ?`;
@@ -38,8 +39,8 @@ export async function updateCardData(connection, pack) {
 
         if(!duplicate_of_code) {
                   // insert the card into the master_cards table
-          const insertSql = `INSERT IGNORE INTO master_cards (master_code, name, subname, card_type, photo_url, text_box, aspect_id) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-          const insertValues = [code, name, subname, type_code, imagesrc, text, aspect_id];
+          const insertSql = `INSERT IGNORE INTO master_cards (master_code, name, subname, card_type, photo_url, text_box, aspect_id, card_url) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+          const insertValues = [code, name, subname, type_code, imagesrc, text, aspect_id, url];
             
           connection.query(insertSql, insertValues, (error, results) => {
             if (error) {
@@ -65,4 +66,30 @@ export async function updateCardData(connection, pack) {
     });
     
   });
+}
+
+export async function updateCardUrl(connection, pack) {
+  fetch(`https://marvelcdb.com/api/public/cards/${pack}`)
+    .then(response => response.json())
+    .then(cards => {
+      cards.forEach(card => {
+        const { code, url, duplicate_of_code } = card;
+
+        if (!duplicate_of_code) {
+          // Update the master_cards table with the card_url
+          const updateSql = `UPDATE master_cards SET card_url = ? WHERE master_code = ?`;
+          const updateValues = [url, code];
+
+          connection.query(updateSql, updateValues, (error, results) => {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log(`Updated card_url for ${code}`);
+            }
+          });
+        } else {
+          console.log(`${code} is a dupe`);
+        }
+      });
+    });
 }

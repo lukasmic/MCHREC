@@ -74,17 +74,31 @@ export function createRadios(radioName, basic = false) {
   if (basic) {
     aspects.push("basic");
   }
-  aspects.forEach(createRadio);
-  function createRadio(aspect) {
+  // aspects.forEach(createRadio);
+  aspects.forEach((aspect, index) => {
     const radioLabel = document.createElement("label");
     const radioInput = document.createElement("input");
     radioInput.setAttribute("type", "radio");
     radioInput.setAttribute("name", radioName);
-    radioInput.setAttribute("value", aspect);
+    radioInput.setAttribute("value", index+1);
     radioLabel.appendChild(radioInput);
     //visible text
     radioLabel.append(capitalize(aspect));
     div.appendChild(radioLabel);
-  }
+  });
   return div;
+
+
+  // function createRadio(aspect) {
+  //   const radioLabel = document.createElement("label");
+  //   const radioInput = document.createElement("input");
+  //   radioInput.setAttribute("type", "radio");
+  //   radioInput.setAttribute("name", radioName);
+  //   radioInput.setAttribute("value", aspect);
+  //   radioLabel.appendChild(radioInput);
+  //   //visible text
+  //   radioLabel.append(capitalize(aspect));
+  //   div.appendChild(radioLabel);
+  // }
+  
 }

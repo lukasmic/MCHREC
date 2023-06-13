@@ -2,7 +2,7 @@
 "heroname":"Adam Warlock",
 "alter_ego": "Adam Warlock"},
 {"code":"12001a",
-"heroname":"Ant_Man",
+"heroname":"Ant-Man",
 "alter_ego": "Scott Lang"},
 {"code":"01040a",
 "heroname":"Black Panther",
@@ -35,7 +35,7 @@
 "heroname":"Gamora",
 "alter_ego": "Gamora"},
 {"code":"27001a",
-"heroname":"Ghost_Spider",
+"heroname":"Ghost-Spider",
 "alter_ego": "Gwen Stacy"},
 {"code":"16001a",
 "heroname":"Groot",
@@ -99,7 +99,7 @@
 },
 {
   "code": "01019a",
-  "heroname": "She_Hulk",
+  "heroname": "She-Hulk",
   "alter_ego": "Jennifer Walters"
 },
 {
@@ -114,27 +114,27 @@
 },
 {
   "code": "30001a",
-  "heroname": "Spider_Ham",
+  "heroname": "Spider-Ham",
   "alter_ego": "Peter Porker"
 },
 {
   "code": "27030a",
-  "heroname": "Spider_Man (Miles Morales)",
+  "heroname": "Spider-Man (Miles Morales)",
   "alter_ego": "Miles Morales"
 },
 {
   "code": "01001a",
-  "heroname": "Spider_Man (Peter Parker)",
+  "heroname": "Spider-Man (Peter Parker)",
   "alter_ego": "Peter Parker"
 },
 {
   "code": "04031a",
-  "heroname": "Spider_Woman",
+  "heroname": "Spider-Woman",
   "alter_ego": "Jessica Drew"
 },
 {
   "code": "17001a",
-  "heroname": "Star_Lord",
+  "heroname": "Star-Lord",
   "alter_ego": "Peter Quill"
 },
 {

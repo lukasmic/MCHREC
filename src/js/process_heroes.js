@@ -1,70 +1,70 @@
-import { findAspectByCode, findHeroByCode, findNameByCode, findPhotoByCode, findURLByCode, getJSON } from "./utils.js";
+import { findAspectByCode, findHeroByCode, findNameByCode, findPhotoByCode, findURLByCode } from "./utils.js";
 
-export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType) {
+export async function processHeroDecks(herocode, heroAspect, percentageType) {
 
-  const heroCardsData = await getJSON("/json/hero_cards_list.json");
-  const deckListData = await getJSON("/json/deck_data_sample.json");
-  const cardsData = await getJSON("/json/card_data_sample.json");
+  // const heroCardsData = await getJSON("/json/hero_cards_list.json");
+  // const deckListData = await getJSON("/json/deck_data_sample.json");
+  // const cardsData = await getJSON("/json/card_data_sample.json");
 
-  const chosenDecks = [];
+  // const chosenDecks = [];
   //these two need to be lets because we don;'t know what they'll be yet before we determine if Cyclops and Gamora are in here causing trouble
-  let aspectDecks;
-  let aspectDeckCount;
+  // let aspectDecks;
+  // let aspectDeckCount;
 
   if (herocode == "33001a" || herocode == "18001a") {//Cyclops or Gamora respectively
     //we basically have to go through the process of Adam Warlock except we stick basic cards with its parent aspect
-    let aspects = ["aggression", "justice", "leadership", "protection"]
+    // let aspects = ["aggression", "justice", "leadership", "protection"]
 
-    aspectDecks = {
-      "aggression": [],
-      "leadership": [],
-      "justice": [],
-      "protection": [],
-      "basic": [],
-    };
+    // aspectDecks = {
+    //   "aggression": [],
+    //   "leadership": [],
+    //   "justice": [],
+    //   "protection": [],
+    //   "basic": [],
+    // };
 
-    for (const deck of deckListData) {
-      //for most heroes we search by hero and aspect combination
-      if (deck.investigator_code === herocode && deck.meta == `{"aspect":"${heroAspect}"}`) {
-        chosenDecks.push(deck);
-      } else {
-        innerLoop: for (const aspect of aspects) {
-          if(deck.meta === `{"aspect":"${aspect}"}`) {
-            aspectDecks[aspect].push(deck);
-            break innerLoop;
-          }
-        }
-      }
-    }
+    // for (const deck of deckListData) {
+    //   //for most heroes we search by hero and aspect combination
+    //   if (deck.investigator_code === herocode && deck.meta == `{"aspect":"${heroAspect}"}`) {
+    //     chosenDecks.push(deck);
+    //   } else {
+    //     innerLoop: for (const aspect of aspects) {
+    //       if(deck.meta === `{"aspect":"${aspect}"}`) {
+    //         aspectDecks[aspect].push(deck);
+    //         break innerLoop;
+    //       }
+    //     }
+    //   }
+    // }
 
   } else { //for ordinary heroes that play nice
-    aspectDecks = [];
+    // aspectDecks = [];
 
-    for (const deck of deckListData) {
-      //for most heroes we search by hero and aspect combination
-      if (deck.investigator_code === herocode && deck.meta == `{"aspect":"${heroAspect}"}`) {
-        chosenDecks.push(deck);
-      } else if (deck.meta == `{"aspect":"${heroAspect}"}`) {
-        //these are the decks that match the aspect and NOT the hero
-        aspectDecks.push(deck);
-      }
-    }
-    aspectDeckCount = aspectDecks.length;
+    // for (const deck of deckListData) {
+    //   //for most heroes we search by hero and aspect combination
+    //   if (deck.investigator_code === herocode && deck.meta == `{"aspect":"${heroAspect}"}`) {
+    //     chosenDecks.push(deck);
+    //   } else if (deck.meta == `{"aspect":"${heroAspect}"}`) {
+    //     //these are the decks that match the aspect and NOT the hero
+    //     aspectDecks.push(deck);
+    //   }
+    // }
+    // aspectDeckCount = aspectDecks.length;
   }
 
-  const totalChosenDecks = chosenDecks.length;
+  // const totalChosenDecks = chosenDecks.length;
   
-  const cardCounts = chosenDecks.reduce((counts, deck) => {
-    const cardsInDeck = Object.entries(deck.slots);
-    const filteredCards = cardsInDeck.filter(([cardCode, count]) => {
-      return count > 0 && !heroCardsData.includes(cardCode);
-    });
-    filteredCards.forEach(([cardCode, count]) => {
-      counts[cardCode] = counts[cardCode] || 0;
-      counts[cardCode]++;
-    });
-    return counts;
-  }, {});
+  // const cardCounts = chosenDecks.reduce((counts, deck) => {
+  //   const cardsInDeck = Object.entries(deck.slots);
+  //   const filteredCards = cardsInDeck.filter(([cardCode, count]) => {
+  //     return count > 0 && !heroCardsData.includes(cardCode);
+  //   });
+  //   filteredCards.forEach(([cardCode, count]) => {
+  //     counts[cardCode] = counts[cardCode] || 0;
+  //     counts[cardCode]++;
+  //   });
+  //   return counts;
+  // }, {});
 
   //I'd love to make a function out of this but our four rascals each need very different things from this chunk
   const cardInfo = Object.entries(cardCounts).map(([cardCode, count]) => {
@@ -109,12 +109,15 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
   .filter(({ percentage }) => percentage >= 5) // remove entries whose percentage is less than 5
  
   //now abide by selected percentage preference
-  if (percentageType == "synergy") {
-    cardInfo.sort((a, b) => b.synergyPercentage - a.synergyPercentage) // sort by percentage from highest to lowest
-  } else {
-    cardInfo.sort((a, b) => b.percentage - a.percentage) // sort by percentage from highest to lowest
-  }
+  // if (percentageType == "synergy") {
+  //   cardInfo.sort((a, b) => b.synergyPercentage - a.synergyPercentage) // sort by percentage from highest to lowest
+  // } else {
+  //   cardInfo.sort((a, b) => b.percentage - a.percentage) // sort by percentage from highest to lowest
+  // }
 
+
+
+  
   //Let's shoot the template literals into two different functions
   //Header and cards
   const heroHeaderDiv = document.getElementById("hero-header");

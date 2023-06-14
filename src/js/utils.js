@@ -1,4 +1,4 @@
-import mysql from "mysql2";
+// import mysql from "mysql2";
 
 // A catch all place for all the random functions that no longer deserve their own file
 //We'll pretend to order these alphabetically but I see myself immediately breaking that convention
@@ -24,17 +24,26 @@ export function disableRadios(radioList, bool) {
 //   return cardObj ? cardObj.faction_code : null;
 // }
 
- export function findAspectByCode(master_code){
-  const connection = sqlConnect();
-  const query = `SELECT aspect_id FROM master_cards WHERE master_code = ?`;
-  const [rows, fields] = connection.execute(query, [master_code]);
-
-  if (rows.length > 0) {
-    return rows[0].aspect_id;
-  } else {
-    return null;
-  }
+export async function getAspectName(aspect) {
+  const response = await fetch(`/api/aspect-name?aspect=${aspect}`);
+  const results = await response.json();
+  console.log(results);
+  return results ? results.aspect_name : null;
 }
+
+
+
+//  export function findAspectByCode(master_code){
+//   const connection = sqlConnect();
+//   const query = `SELECT aspect_id FROM master_cards WHERE master_code = ?`;
+//   const [rows, fields] = connection.execute(query, [master_code]);
+
+//   if (rows.length > 0) {
+//     return rows[0].aspect_id;
+//   } else {
+//     return null;
+//   }
+// }
 
 
 

@@ -1,10 +1,10 @@
 import { processHeroDecks } from "./process_heroes.js";
-import { processAdamWarlockDecks } from "./adam_warlock.js";
-import { processSpiderWomanDecks } from "./spider_woman.js";
+// import { processAdamWarlockDecks } from "./adam_warlock.js";
+// import { processSpiderWomanDecks } from "./spider_woman.js";
 import { createHeroSelector } from "./hero_selector.js";
 import { disableRadios, getJSON, getSelectedRadioButtonValue, hamburger, loadHeaderFooter } from "./utils.js";
 
-
+// console.log("hello world");
 const heroNamesData = await getJSON("/json/hero_names.json");
 loadHeaderFooter().then(header => {
   hamburger(header);
@@ -77,7 +77,8 @@ async function handleSubmit(event) {
   const percentageType = getSelectedRadioButtonValue(document.getElementsByName("percentage-selector"));
 
   if (herocode == "21031a") { //Adam Warlock
-    await processAdamWarlockDecks(percentageType);
+    // await processAdamWarlockDecks(percentageType);
+    await processHeroDecks("21031a", 0, heroNamesData, percentageType);
   } else if (herocode == "04031a") { //Spider-Woman
     const heroAspect2 = getSelectedRadioButtonValue(radio2);
     await processSpiderWomanDecks(heroAspect, heroAspect2, percentageType);

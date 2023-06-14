@@ -14,7 +14,7 @@
     "fs-extra": "^11.1.0",
     "luxon": "^3.3.0",
     "mongodb": "^4.3.2",
-    "mysql2": "^3.3.2",
+    "mysql2": "^3.3.5",
     "mysql2-promise": "^0.1.4",
     "node-cron": "^3.0.2",
     "node-fetch": "^3.3.1",

@@ -25,6 +25,7 @@ export async function ripDeckData(connection) {
       console.log(`data found for ${formattedDate}`);
       return;
     }
+    console.log(`data not found for ${formattedDate}, fetching...`);
       
     fetch(`https://marvelcdb.com/api/public/decklists/by_date/${formattedDate}`)
     .then(response => response.json())

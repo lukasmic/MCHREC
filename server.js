@@ -30,6 +30,11 @@ app.get('/api/calculate-synergy', async (req, res) => {
     if (herocode == "21031a") {
       procedureCall = `CALL CalculateAdamWarlockSynergy(${synPerc})`;
       // console.log(procedureCall);
+    } else if (herocode == "33001a" || herocode == "18001a") {
+      procedureCall = `CALL CalculateCyclopsSynergy('${herocode}', ${heroAspect}, ${synPerc})`;
+    } else if (herocode == "04031a") {
+      procedureCall = `CALL CalculateSpiderWomanSynergy(${heroAspect}, ${synPerc})`;
+      // console.log(procedureCall); 
     } else {
       procedureCall = `CALL CalculateSynergy('${herocode}', ${heroAspect}, ${synPerc})`;
       // console.log(procedureCall);
@@ -66,7 +71,6 @@ app.get('/api/aspect-name', async (req, res) => {
 
 ripDeckData(connection)
 
-console.log("hello world");
 
 // const twoDaysAgo = new Date();
 // twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);

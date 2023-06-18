@@ -27,7 +27,7 @@ export function disableRadios(radioList, bool) {
 export async function getAspectName(aspect) {
   const response = await fetch(`/api/aspect-name?aspect=${aspect}`);
   const results = await response.json();
-  console.log(results);
+  // console.log(results);
   return results ? results.aspect_name : null;
 }
 

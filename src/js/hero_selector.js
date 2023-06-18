@@ -41,12 +41,42 @@ export async function createHeroSelector(heroCardsData) {
   percentDiv.appendChild(percentageRadio);
   selectorSection.appendChild(percentDiv);
 
+  //deck-history
+  const historyDiv = document.createElement("div");
+  historyDiv.innerHTML = "<span>Deck History: </span>";
+  historyDiv.setAttribute("id", "history-selector");
+  const historyOptions = [30, 90, 180, 360, 900];
+  for (let i in historyOptions) {
+    historyDiv.appendChild(createHistoryRadio(historyOptions[i]));
+  }
+  selectorDiv.appendChild(historyDiv);
+
   //submit button
   const submitBtn = document.createElement("button");
   submitBtn.setAttribute("disabled", "");
   submitBtn.setAttribute("id", "submitBtn");
   submitBtn.textContent = "Get Results";
   selectorSection.appendChild(submitBtn);
+}
+
+
+function createHistoryRadio(option) {
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  input.setAttribute("type", "radio");
+  input.setAttribute("name", "history-selector");
+  input.setAttribute("value", option);
+  if(option == 180) {
+    input.setAttribute("checked", "checked");
+  }
+  label.appendChild(input);
+  //visible text
+  if (option == 900) {
+    label.append("All time")
+  } else {
+    label.append(option);
+  }
+  return label;
 }
 
 

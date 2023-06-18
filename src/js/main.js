@@ -75,14 +75,17 @@ async function handleSubmit(event) {
   const herocode = heroSelector.value;
   const heroAspect = getSelectedRadioButtonValue(radio1);
   const percentageType = getSelectedRadioButtonValue(document.getElementsByName("percentage-selector"));
+  const historyOption = getSelectedRadioButtonValue(document.getElementsByName("history-selector"));
 
   if (herocode == "21031a") { //Adam Warlock
     // await processAdamWarlockDecks(percentageType);
-    await processHeroDecks("21031a", 0, heroNamesData, percentageType);
+    await processHeroDecks("21031a", 0, heroNamesData, percentageType, historyOption);
   } else if (herocode == "04031a") { //Spider-Woman
-    const heroAspect2 = getSelectedRadioButtonValue(radio2);
-    await processSpiderWomanDecks(heroAspect, heroAspect2, percentageType);
+    const heroAspect2 = getSelectedRadioButtonValue(radio2); 
+    //the SQL needs aspect 1 & 2 to be 12 so we're going to concat
+    const swAspect = parseInt('' + Math.min(heroAspect, heroAspect2) + Math.max(heroAspect, heroAspect2));
+    await processHeroDecks("04031a", swAspect, heroNamesData, percentageType, historyOption);
   } else {
-    await processHeroDecks(herocode, heroAspect, heroNamesData, percentageType);
+    await processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption);
   }
 }

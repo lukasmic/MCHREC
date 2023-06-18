@@ -1,22 +1,16 @@
 import { findHeroByCode, getJSON, getAspectName } from "./utils.js";
-// import {sqlConnect} from "./server-utils.js"
 
-export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType) {
+export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption) {
+  // console.log(herocode, heroAspect, percentageType);
+  
   let response;
   let results;
-  if (herocode == "21031a") {
-    response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}`);
-    results = await response.json();
-  } else {
-    response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}`);
-    results = await response.json();
-  }
+ 
+  response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}&history=${historyOption}`);
+  results = await response.json();
+  // console.log(results);
 
-
-
-
-
-    //Let's shoot the template literals into two different functions
+  //Let's shoot the template literals into two different functions
   //Header and cards
   const heroHeaderDiv = document.getElementById("hero-header");
   //clear it in case it's a resubmit
@@ -25,8 +19,6 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
 
   const cardResultsDiv = document.getElementById("card-results");
   cardResultsDiv.innerHTML = "";
-
-
 
   const cardInfo = results.map(row => {
     return {
@@ -37,26 +29,14 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
       synergy: row.synergy,
       cardUrl: row.card_url,
       totalChosenDecks: row.chosen_count
-    };
+    }; 
   });
+  // console.log(cardInfo);
 
-    //now abide by selected percentage preference
-  if (percentageType == "synergy") {
-    cardInfo.sort((a, b) => b.synergy - a.synergy) // sort by percentage from highest to lowest
-  } else {
-    cardInfo.sort((a, b) => b.popularity - a.popularity) // sort by percentage from highest to lowest
-  }
-
-   const aspectName = (heroAspect == 0) ? "" : await getAspectName(heroAspect);
+  const aspectName = (heroAspect == 0) ? "" : await getAspectName(heroAspect);
 
   buildHeroHeader(heroName, aspectName, cardInfo[0].totalChosenDecks, heroHeaderDiv);
   buildCardDiv(cardInfo, cardInfo[0].totalChosenDecks, cardResultsDiv);
-
-
-    
-
-
-  
 }
 
 
@@ -73,9 +53,9 @@ export function buildCardDiv(cardInfo, totalChosenDecks, cardResultsDiv) {
   
   cardInfo.forEach(({ code, cardName, cardPhoto, popularity, synergy, cardUrl }) => {
     if (code == 0) {
-      return;
+      return; 
     }
-    const li = document.createElement("li");
+    const li = document.createElement("li"); 
     li.setAttribute("class", "center");
     li.innerHTML = `<p id="${code}"><a href="${cardUrl}"><strong>${cardName}</strong></a></p>`;
     // console.log(cardPhoto);

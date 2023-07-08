@@ -15,7 +15,7 @@ export async function updatePackData(connection) {
       const packName = item.name;
       const pack = { packCode, packName };
       packs.push(pack);
-    });
+    }); 
 
     packs.forEach(pack => {
       // IGNORE keyword means we won't try to shove it in again if it's already there

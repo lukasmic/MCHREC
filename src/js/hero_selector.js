@@ -1,6 +1,10 @@
 import { capitalize } from "./utils.js";
 
 export async function createHeroSelector(heroCardsData) {
+  const response = await fetch(`/api/get-packs`);
+  const results = await response.json();
+  console.log(results);
+
   const selectorSection = document.querySelector("#hero-select");
   
   const selectorDiv = document.createElement("div");
@@ -51,48 +55,16 @@ export async function createHeroSelector(heroCardsData) {
   }
   selectorDiv.appendChild(historyDiv);
 
+  //pack-checklist
+  const packsCheckboxesDiv = createPackCheckboxes(results);
+  selectorSection.appendChild(packsCheckboxesDiv);
+
   //submit button
   const submitBtn = document.createElement("button");
   submitBtn.setAttribute("disabled", "");
   submitBtn.setAttribute("id", "submitBtn");
   submitBtn.textContent = "Get Results";
   selectorSection.appendChild(submitBtn);
-}
-
-
-function createHistoryRadio(option) {
-  const label = document.createElement("label");
-  const input = document.createElement("input");
-  input.setAttribute("type", "radio");
-  input.setAttribute("name", "history-selector");
-  input.setAttribute("value", option);
-  if(option == 180) {
-    input.setAttribute("checked", "checked");
-  }
-  label.appendChild(input);
-  //visible text
-  if (option == 900) {
-    label.append("All time")
-  } else {
-    label.append(option);
-  }
-  return label;
-}
-
-
-function createPercentRadio(name, checked = false) {
-  const label = document.createElement("label");
-  const input = document.createElement("input");
-  input.setAttribute("type", "radio");
-  input.setAttribute("name", "percentage-selector");
-  input.setAttribute("value", name);
-  if (checked) {
-    input.setAttribute("checked", "checked");
-  }
-  label.appendChild(input);
-  //visible text
-  label.append(name);
-  return label;
 }
 
 
@@ -117,18 +89,73 @@ export function createRadios(radioName, basic = false) {
     div.appendChild(radioLabel);
   });
   return div;
+}
 
 
-  // function createRadio(aspect) {
-  //   const radioLabel = document.createElement("label");
-  //   const radioInput = document.createElement("input");
-  //   radioInput.setAttribute("type", "radio");
-  //   radioInput.setAttribute("name", radioName);
-  //   radioInput.setAttribute("value", aspect);
-  //   radioLabel.appendChild(radioInput);
-  //   //visible text
-  //   radioLabel.append(capitalize(aspect));
-  //   div.appendChild(radioLabel);
-  // }
-  
+function createHistoryRadio(option) {
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  input.setAttribute("type", "radio");
+  input.setAttribute("name", "history-selector");
+  input.setAttribute("value", option);
+  if(option == 180) {
+    input.setAttribute("checked", "checked");
+  }
+  label.appendChild(input);
+  //visible text
+  if (option == 900) {
+    label.append("All time")
+  } else {
+    label.append(option);
+  }
+  return label;
+}
+
+
+function createPackCheckboxes(packsData) {
+  // console.log(packsData);
+  const packsDiv = document.createElement("div");
+  packsDiv.setAttribute("id", "packs");
+
+  for (const pack of packsData) {
+    const packLabel = document.createElement("label");
+    const packInput = document.createElement("input");
+    packInput.setAttribute("type", "checkbox");
+    packInput.setAttribute("name", "pack-selector"); 
+    packInput.setAttribute("value", pack.pack_code);
+    packInput.checked = true;
+    packLabel.appendChild(packInput);
+    // visible text
+    packLabel.append(pack.pack_name);
+    packsDiv.appendChild(packLabel);
+  }
+
+  const checkAllButton = document.createElement("button");
+  checkAllButton.setAttribute("id", "check-all");
+  checkAllButton.textContent = "Check All";
+
+  const uncheckAllButton = document.createElement("button");
+  uncheckAllButton.setAttribute("id", "uncheck-all");
+  uncheckAllButton.textContent = "Uncheck All";
+
+  packsDiv.appendChild(checkAllButton);
+  packsDiv.appendChild(uncheckAllButton);
+
+  return packsDiv;
+}
+
+
+function createPercentRadio(name, checked = false) {
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  input.setAttribute("type", "radio");
+  input.setAttribute("name", "percentage-selector");
+  input.setAttribute("value", name);
+  if (checked) {
+    input.setAttribute("checked", "checked");
+  }
+  label.appendChild(input);
+  //visible text
+  label.append(name);
+  return label;
 }

@@ -12,6 +12,14 @@ export function capitalize(string) {
 }
 
 
+export function checkAllPacks() {
+  const packCheckboxes = document.getElementsByName("pack-selector");
+  for (const checkbox of packCheckboxes) {
+    checkbox.checked = true;
+  }
+}
+
+
 export function disableRadios(radioList, bool) {
   for (let i = 0; i < radioList.length; i++) {
     radioList[i].disabled = bool;
@@ -83,6 +91,17 @@ export async function getJSON(url) {
     throw new Error(`Failed to fetch ${url}: ${response.status} ${response.statusText}`);
   }
   return await response.json();
+}
+
+
+export function getSelectedPackIds(packsCheckBoxes) {
+  const selectedPacks = [];
+  for (const checkbox of packsCheckBoxes) {
+    if (checkbox.checked) {
+      selectedPacks.push(checkbox.value);
+    }
+  }
+  return selectedPacks;
 }
 
 
@@ -159,4 +178,12 @@ function toggleMenu() {
   const primaryNav = document.getElementById("primaryNav");
   primaryNav.classList.toggle("open");
   document.getElementById("hamburgerBtn").classList.toggle("open");
+}
+
+
+export function uncheckAllPacks() {
+  const packCheckboxes = document.getElementsByName("pack-selector");
+  for (const checkbox of packCheckboxes) {
+    checkbox.checked = false;
+  }
 }

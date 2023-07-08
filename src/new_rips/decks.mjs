@@ -5,7 +5,7 @@ import fetch from "node-fetch";
 
 export async function ripDeckData(connection) {
   const twoDaysAgo = new Date();
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 4);
   const formattedDate = twoDaysAgo.toISOString().slice(0, 10);
 
   // console.log(twoDaysAgo);

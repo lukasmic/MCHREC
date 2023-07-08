@@ -2,7 +2,7 @@ import { processHeroDecks } from "./process_heroes.js";
 // import { processAdamWarlockDecks } from "./adam_warlock.js";
 // import { processSpiderWomanDecks } from "./spider_woman.js";
 import { createHeroSelector } from "./hero_selector.js";
-import { disableRadios, getJSON, getSelectedRadioButtonValue, hamburger, loadHeaderFooter } from "./utils.js";
+import { checkAllPacks, disableRadios, getJSON, getSelectedRadioButtonValue, getSelectedPackIds, hamburger, loadHeaderFooter, uncheckAllPacks } from "./utils.js";
 
 // console.log("hello world");
 const heroNamesData = await getJSON("/json/hero_names.json");
@@ -18,6 +18,9 @@ const radio1 = document.getElementsByName("aspect");
 const submitButton = document.getElementById("submitBtn");
 const radio2Div = document.getElementById("aspect2");
 const radio2 = document.getElementsByName("aspect2");
+const packs = document.getElementsByName("pack-selector");
+const checkAllButton = document.getElementById("check-all");
+const uncheckAllButton = document.getElementById("uncheck-all");
 
 // Add event listeners to selector and radio buttons
 heroSelector.addEventListener("change", handleSelectionChange);
@@ -28,7 +31,8 @@ for (let i = 0; i < radio2.length; i++) {
   radio2[i].addEventListener("change", handleSelectionChange);
 }
 submitButton.addEventListener("click", handleSubmit);
-
+checkAllButton.addEventListener("click", checkAllPacks);
+uncheckAllButton.addEventListener("click", uncheckAllPacks);
 
 // Function to handle selection changes
 function handleSelectionChange() {
@@ -76,16 +80,19 @@ async function handleSubmit(event) {
   const heroAspect = getSelectedRadioButtonValue(radio1);
   const percentageType = getSelectedRadioButtonValue(document.getElementsByName("percentage-selector"));
   const historyOption = getSelectedRadioButtonValue(document.getElementsByName("history-selector"));
+  const packList = getSelectedPackIds(packs);
 
   if (herocode == "21031a") { //Adam Warlock
     // await processAdamWarlockDecks(percentageType);
-    await processHeroDecks("21031a", 0, heroNamesData, percentageType, historyOption);
+    await processHeroDecks("21031a", 0, heroNamesData, percentageType, historyOption, packList);
   } else if (herocode == "04031a") { //Spider-Woman
     const heroAspect2 = getSelectedRadioButtonValue(radio2); 
     //the SQL needs aspect 1 & 2 to be 12 so we're going to concat
     const swAspect = parseInt('' + Math.min(heroAspect, heroAspect2) + Math.max(heroAspect, heroAspect2));
-    await processHeroDecks("04031a", swAspect, heroNamesData, percentageType, historyOption);
+    await processHeroDecks("04031a", swAspect, heroNamesData, percentageType, historyOption, packList);
   } else {
-    await processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption);
+    await processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList);
   }
 }
+
+

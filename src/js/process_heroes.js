@@ -1,19 +1,16 @@
 import { findHeroByCode, getJSON, getAspectName } from "./utils.js";
 
-export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption) {
-  // console.log(herocode, heroAspect, percentageType);
-  
-  let response;
-  let results;
- 
-  response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}&history=${historyOption}`);
-  results = await response.json();
+export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList) {
+  // console.log(herocode, heroAspect, percentageType, historyOption, packList);
+  const selectedPacksString = packList.join(",");
+  const response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}&history=${historyOption}&packs=${selectedPacksString}`);
+  const results = await response.json();
   // console.log(results);
 
   //Let's shoot the template literals into two different functions
   //Header and cards
   const heroHeaderDiv = document.getElementById("hero-header");
-  //clear it in case it's a resubmit
+  // clear it in case it's a resubmit
   heroHeaderDiv.innerHTML = "";
   const heroName = findHeroByCode(heroNamesData, herocode);
 

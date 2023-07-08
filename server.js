@@ -5,9 +5,7 @@ import { ripDeckData } from "./src/new_rips/decks.mjs";
 // import {sqlConnect} from "./src/js/utils.js";
 import { sqlConnect } from "./src/js/server-utils.js";
 import express from "express";
-// import mysql from "mysql2";
 import dotenv from 'dotenv'; dotenv.config();
-
 
 const app = express();
 app.use(express.static("src"));
@@ -16,27 +14,49 @@ app.listen(3000, function() {
   console.log("Server listening on port 3000");
 });
 
-const connection = sqlConnect();
+let connection;
+
+// Add the handleDisconnect function here
+function handleDisconnect() {
+  connection = sqlConnect();
+  connection.connect(function(err) {
+    if(err) {
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000);
+    }
+  });
+
+  connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+}
+
+// Call handleDisconnect once when the server starts
+handleDisconnect();
 
 
 
 app.get('/api/calculate-synergy', async (req, res) => {
-  const { herocode, heroAspect, percentageType } = req.query;
-  const connection = sqlConnect();
+  const { herocode, heroAspect, percentageType, history, packs } = req.query;
   const isSynergy = percentageType == "synergy";
   const synPerc = isSynergy ? true : false;
   let procedureCall;
 
     if (herocode == "21031a") {
-      procedureCall = `CALL CalculateAdamWarlockSynergy(${synPerc})`;
-      // console.log(procedureCall);
+      procedureCall = `CALL CalculateAdamWarlockSynergy(${synPerc}, ${history}, '${packs}')`; 
+      // console.log(procedureCall); 
     } else if (herocode == "33001a" || herocode == "18001a") {
-      procedureCall = `CALL CalculateCyclopsSynergy('${herocode}', ${heroAspect}, ${synPerc})`;
+      procedureCall = `CALL CalculateCyclopsSynergy('${herocode}', ${heroAspect}, ${synPerc}, ${history}, '${packs}')`;
     } else if (herocode == "04031a") {
-      procedureCall = `CALL CalculateSpiderWomanSynergy(${heroAspect}, ${synPerc})`;
+      procedureCall = `CALL CalculateSpiderWomanSynergy(${heroAspect}, ${synPerc}, ${history}, '${packs}')`;
       // console.log(procedureCall); 
     } else {
-      procedureCall = `CALL CalculateSynergy('${herocode}', ${heroAspect}, ${synPerc})`;
+      procedureCall = `CALL CalculateSynergy('${herocode}', ${heroAspect}, ${synPerc}, ${history}, '${packs}')`;
       // console.log(procedureCall);
     }
   
@@ -64,6 +84,23 @@ app.get('/api/aspect-name', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     } else {
       res.json(results[0]);
+    }
+  });
+});
+
+app.get('/api/get-packs', async (req, res) => {
+  // console.log("here I am");
+  // console.log(req.query);
+  const connection = sqlConnect();
+  const procedureCall = `SELECT * from packs`;
+
+  
+  connection.query(procedureCall, (error, results) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      res.json(results);
     }
   });
 });

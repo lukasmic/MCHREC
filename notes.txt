@@ -1,3 +1,30 @@
+To Do:
+
+- Fill in the following empty tables:
+
+3 records at least
+
+
+modulars
+modular_cardlist (linking)
+traits
+card_traits
+villains
+villain_cardlist (linking)
+
+
+reverse engineer send it all (ALL of it he's not afraid)
+
+create erd diagram and send that as well
+
+attempt to throw in bad data to prove that data types matter and I'm catching the right things
+
+PowerPoint showing everything off
+doesn't need to be over the top (I'll just show off hero synergy)
+
+
+
+
 We have to keep in mind that the /public/cards/ API call only returns player deck card, including campaign cards.
 
 Therefore for completeness we will want to go through every single pack call in the API as well.

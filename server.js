@@ -1,6 +1,8 @@
 import { updatePackData } from "./src/new_rips/packs.mjs";
 import { updateCardData, updateCardUrl } from "./src/new_rips/cards.mjs";
 import { updateHeroData } from "./src/new_rips/heroes.mjs";
+import { updateTraits } from "./src/new_rips/traits.mjs";
+import { updateVillainSets } from "./src/new_rips/villains.mjs";
 import { ripDeckData } from "./src/new_rips/decks.mjs";
 // import {sqlConnect} from "./src/js/utils.js";
 import { sqlConnect } from "./src/js/server-utils.js";
@@ -74,7 +76,7 @@ app.get('/api/aspect-name', async (req, res) => {
   // console.log("here I am");
   // console.log(req.query);
   const aspect = req.query.aspect;
-  const connection = sqlConnect();
+  // const connection = sqlConnect();
   const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ${aspect}`;
 
   
@@ -91,7 +93,7 @@ app.get('/api/aspect-name', async (req, res) => {
 app.get('/api/get-packs', async (req, res) => {
   // console.log("here I am");
   // console.log(req.query);
-  const connection = sqlConnect();
+  // const connection = sqlConnect();
   const procedureCall = `SELECT * from packs`;
 
   
@@ -112,6 +114,35 @@ ripDeckData(connection)
 // const twoDaysAgo = new Date();
 // twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
 // const formattedDate = twoDaysAgo.toISOString().slice(0, 10);
+
+
+
+// const query = 'SELECT pack_code FROM packs';
+// connection.query(query, (error, results) => {
+//   if (error) throw error;
+//   // Loop through results and call function for each pack code
+//   results.forEach((result, index) => {
+//     const packCode = result.pack_code;
+//     // Set a timeout for each call to updateTraits
+//     setTimeout(() => {
+//       updateTraits(connection, packCode);
+//     }, index * 30000); // Delay each call by 60 seconds
+//   });
+// });
+
+
+// const query = 'SELECT pack_code FROM packs';
+// connection.query(query, (error, results) => {
+//   if (error) throw error;
+//   // Loop through results and call function for each pack code
+//   results.forEach((result, index) => {
+//     const packCode = result.pack_code;
+//     // Set a timeout for each call to updateTraits
+//     setTimeout(() => {
+//       updateVillainSets(connection, packCode);
+//     }, index * 15000); // Delay each call by 60 seconds
+//   });
+// });
 
 
 
@@ -164,36 +195,36 @@ ripDeckData(connection)
 
 
 
-/*
 
 
-const startDate = new Date();
-startDate.setDate(startDate.getDate() - 7); // Set the start date 1000 days back
 
-//last date 2022-07-30
-//2021-12-17
-//310
-let currentDate = new Date(); // Start from the present day
-currentDate.setDate(currentDate.getDate() - 1); //except let's actually start with yesterday
+// const startDate = new Date();
+// startDate.setDate(startDate.getDate() - 60); // Set the start date 1000 days back
 
-function task() {
-  if (currentDate >= startDate) {
-    const formattedDate = currentDate.toISOString().slice(0, 10);
-    ripDeckData(connection, formattedDate);
-    console.log(currentDate);
+// //last date 2022-07-30
+// //2021-12-17
+// //310
+// let currentDate = new Date(); // Start from the present day
+// currentDate.setDate(currentDate.getDate() - 1); //except let's actually start with yesterday
 
-    // Roll the date one day back
-    currentDate.setDate(currentDate.getDate() - 1);
+// function task() {
+//   if (currentDate >= startDate) {
+//     const formattedDate = currentDate.toISOString().slice(0, 10);
+//     ripDeckData(connection, formattedDate);
+//     console.log(currentDate);
 
-    // Set a 60-second delay before the next iteration
-    //keep at 60000, 30000 was not enough
-    setTimeout(task, 6000);
-  }
-}
+//     // Roll the date one day back
+//     currentDate.setDate(currentDate.getDate() - 1); 
 
-// Start the loop
-task();
+//     // Set a 60-second delay before the next iteration
+//     //keep at 60000, 30000 was not enough
+//     setTimeout(task, 6000);
+//   }
+// }
+
+// // Start the loop
+// task();
 
 
-*/
+
 

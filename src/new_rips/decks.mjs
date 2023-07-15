@@ -1,11 +1,11 @@
 import fs from "fs";
 import fetch from "node-fetch";
 
-
-
+// export async function ripDeckData(connection,formattedDate) {
+//turn these on for day to day
 export async function ripDeckData(connection) {
   const twoDaysAgo = new Date();
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 4);
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
   const formattedDate = twoDaysAgo.toISOString().slice(0, 10);
 
   // console.log(twoDaysAgo);
@@ -28,7 +28,17 @@ export async function ripDeckData(connection) {
     console.log(`data not found for ${formattedDate}, fetching...`);
       
     fetch(`https://marvelcdb.com/api/public/decklists/by_date/${formattedDate}`)
-    .then(response => response.json())
+    .then(response => {
+      if (response.status === 404) {
+        console.log(`No decklists found for date ${formattedDate}`);
+        return;
+      }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        return response.json();
+      }
+    })
     .then(decks => {
 
       decks.forEach(deck => {

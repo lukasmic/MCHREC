@@ -25,6 +25,7 @@ doesn't need to be over the top (I'll just show off hero synergy)
 
 
 
+
 We have to keep in mind that the /public/cards/ API call only returns player deck card, including campaign cards.
 
 Therefore for completeness we will want to go through every single pack call in the API as well.
@@ -52,3 +53,18 @@ faction_code = "agg" through "basic", check for "duplicate_of_code"
 faction_code = "campaign", check value of "card_set_type_name_code"
 
 
+    module
+
+{"pack_code":"core","pack_name":"Core Set","type_code":"side_scheme","type_name":"Side Scheme","faction_code":"encounter","faction_name":"Encounter",
+
+"card_set_code":"bomb_scare","card_set_name":"Bomb Scare","card_set_type_name_code":"modular",
+
+"position":109,"set_position":1,"code":"01109","name":"Bomb Scare","real_name":"Bomb Scare","text":"<b>When Revealed<\/b>: Place an additional 1 [per_hero] threat here.\n<i>(Acceleration Icon: Place +1 threat on the main scheme at the start of the villain phase.)<\/i>","real_text":"<b>When Revealed<\/b>: Place an additional 1 [per_hero] threat here.\n<i>(Acceleration Icon: Place +1 threat on the main scheme at the start of the villain phase.)<\/i>","boost":2,"quantity":1,"health_per_hero":false,"base_threat":2,"base_threat_fixed":true,"escalation_threat_fixed":false,"scheme_acceleration":1,"threat_fixed":false,"flavor":"Reports are out that Hydra agents have planted a bomb in a nearby hotel.","is_unique":false,"hidden":false,"permanent":false,"double_sided":false,"octgn_id":"8cb351f4-cb5a-4407-8f01-1a6d61c8eb13","url":"https:\/\/marvelcdb.com\/card\/01109","imagesrc":"\/bundles\/cards\/01109.png","spoiler":1},
+
+
+
+{"pack_code":"core","pack_name":"Core Set","type_code":"attachment","type_name":"Attachment","faction_code":"encounter","faction_name":"Encounter",
+
+"card_set_code":"rhino","card_set_name":"Rhino","card_set_type_name_code":"villain",
+
+"position":98,"set_position":5,"code":"01098","name":"Armored Rhino Suit","real_name":"Armored Rhino Suit","text":"Attach to Rhino.\n<b>Forced Interrupt<\/b>: When any amount of damage would be dealt to Rhino, place it here instead. Then, if there is at least 5 damage here, discard Armored Rhino Suit.","real_text":"Attach to Rhino.\n<b>Forced Interrupt<\/b>: When any amount of damage would be dealt to Rhino, place it here instead. Then, if there is at least 5 damage here, discard Armored Rhino Suit.","boost":0,"quantity":1,"health_per_hero":false,"base_threat_fixed":false,"escalation_threat_fixed":false,"threat_fixed":false,"traits":"Armor.","real_traits":"Armor.","is_unique":false,"hidden":false,"permanent":false,"double_sided":false,"octgn_id":"71ec987b-57ea-441f-8329-2979d4f452a3","url":"https:\/\/marvelcdb.com\/card\/01098","imagesrc":"\/bundles\/cards\/01098.png","spoiler":1},

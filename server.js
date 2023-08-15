@@ -133,7 +133,7 @@ setInterval(() => {
       console.log('Pinged database successfully.');
     }
   });
-}, 15 * 60 * 1000);  // Ping every 15 minutes, for example
+}, 2 * 60 * 1000);  // Ping every 15 minutes, for example
 
 
 // const twoDaysAgo = new Date();

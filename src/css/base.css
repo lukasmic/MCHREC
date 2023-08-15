@@ -23,6 +23,12 @@ footer {
   border-top: 1px solid rgba(0,0,0,.5);
 }
 
+label {
+  display: inline-block;
+  margin: 3px;
+  padding: 1px;
+}
+
 
 /* hamburger navigation */
 
@@ -30,8 +36,6 @@ footer {
   display: flex;
   justify-content: space-between;
 }
-
-
 
 #hamburgerBtn {
   align-items: center;
@@ -86,8 +90,12 @@ nav ul.open {display: block;}
 
 
 /* hero page */
-#aspect2 {
+#aspect2, #packs {
   display: none;
+}
+
+#packs.open {
+  display: block;
 }
 
 #card-results ul, #staple-results ul {

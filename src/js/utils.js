@@ -27,39 +27,12 @@ export function disableRadios(radioList, bool) {
 }
 
 
-// export function findAspectByCode(cardsData, code) {
-//   const cardObj = cardsData.find(card => card.code === code);
-//   return cardObj ? cardObj.faction_code : null;
-// }
-
 export async function getAspectName(aspect) {
   const response = await fetch(`/api/aspect-name?aspect=${aspect}`);
   const results = await response.json();
-  // console.log(results);
   return results ? results.aspect_name : null;
 }
 
-
-
-//  export function findAspectByCode(master_code){
-//   const connection = sqlConnect();
-//   const query = `SELECT aspect_id FROM master_cards WHERE master_code = ?`;
-//   const [rows, fields] = connection.execute(query, [master_code]);
-
-//   if (rows.length > 0) {
-//     return rows[0].aspect_id;
-//   } else {
-//     return null;
-//   }
-// }
-
-
-
-
-// export function findHeroByCode(heroNamesData, code) {
-//   const heroObj = heroNamesData.find(card => card.code === code);
-//   return heroObj ? heroObj.heroname : null;
-// }
 
 export function findHeroByCode(heroNamesData, code) {
   const heroObj = heroNamesData.find(card => card.code === code);
@@ -153,6 +126,12 @@ export function renderWithTemplate(
   if (callback) {
     callback(data);
   }
+}
+
+
+export function showPacks() {
+  const packsDiv = document.getElementById("packs");
+  packsDiv.classList.toggle("open");
 }
 
 

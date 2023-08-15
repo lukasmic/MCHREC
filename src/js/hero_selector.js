@@ -3,7 +3,7 @@ import { capitalize } from "./utils.js";
 export async function createHeroSelector(heroCardsData) {
   const response = await fetch(`/api/get-packs`);
   const results = await response.json();
-  console.log(results);
+  // console.log(results);
 
   const selectorSection = document.querySelector("#hero-select");
   
@@ -35,6 +35,28 @@ export async function createHeroSelector(heroCardsData) {
   const radio2 = createRadios("aspect2");
   selectorSection.appendChild(radio2);
 
+  //deck-history
+  const historyDiv = document.createElement("div");
+  historyDiv.innerHTML = "<span>Deck History: </span>";
+  historyDiv.setAttribute("id", "history-selector");
+  const historyOptions = [30, 90, 180, 360, 900];
+  for (let i in historyOptions) {
+    historyDiv.appendChild(createHistoryRadio(historyOptions[i]));
+  }
+  selectorSection.appendChild(historyDiv);
+
+  //pack-checklist
+  const packsSection = document.createElement("section");
+  packsSection.setAttribute("id", "packs-section");
+  selectorSection.appendChild(packsSection);
+  const packsCheckboxesDiv = createPackCheckboxes(results);
+  packsSection.appendChild(packsCheckboxesDiv);
+
+  const showPacksBtn = document.createElement("button");
+  showPacksBtn.setAttribute("id", "showPacksBtn");
+  showPacksBtn.textContent = "Select Packs (optional)";
+  packsSection.appendChild(showPacksBtn);
+
   //percentage-selector
   const percentDiv = document.createElement("div");
   percentDiv.innerHTML = "<span>Sort by: </span>";
@@ -45,26 +67,17 @@ export async function createHeroSelector(heroCardsData) {
   percentDiv.appendChild(percentageRadio);
   selectorSection.appendChild(percentDiv);
 
-  //deck-history
-  const historyDiv = document.createElement("div");
-  historyDiv.innerHTML = "<span>Deck History: </span>";
-  historyDiv.setAttribute("id", "history-selector");
-  const historyOptions = [30, 90, 180, 360, 900];
-  for (let i in historyOptions) {
-    historyDiv.appendChild(createHistoryRadio(historyOptions[i]));
-  }
-  selectorDiv.appendChild(historyDiv);
-
-  //pack-checklist
-  const packsCheckboxesDiv = createPackCheckboxes(results);
-  selectorSection.appendChild(packsCheckboxesDiv);
-
   //submit button
   const submitBtn = document.createElement("button");
   submitBtn.setAttribute("disabled", "");
   submitBtn.setAttribute("id", "submitBtn");
   submitBtn.textContent = "Get Results";
   selectorSection.appendChild(submitBtn);
+
+  const resPG = document.createElement("p");
+  resPG.classList.add("center");
+  resPG.textContent = "Results may take a few seconds to process.";
+  selectorSection.appendChild(resPG);
 }
 
 
@@ -92,7 +105,7 @@ export function createRadios(radioName, basic = false) {
 }
 
 
-function createHistoryRadio(option) {
+export function createHistoryRadio(option) {
   const label = document.createElement("label");
   const input = document.createElement("input");
   input.setAttribute("type", "radio");

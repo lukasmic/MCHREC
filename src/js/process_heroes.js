@@ -1,4 +1,4 @@
-import { findHeroByCode, getJSON, getAspectName } from "./utils.js";
+import { findHeroByCode, getAspectName } from "./utils.js";
 
 export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList) {
   // console.log(herocode, heroAspect, percentageType, historyOption, packList);

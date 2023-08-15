@@ -1,6 +1,4 @@
 import fs from "fs";
-import fetch from "node-fetch";
-import { getJSON } from "../js/utils.js";
 
 
 //for ease of use this will be the 

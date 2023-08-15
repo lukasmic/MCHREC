@@ -91,8 +91,6 @@ app.get('/api/aspect-name', async (req, res) => {
 });
 
 app.get('/api/get-packs', async (req, res) => {
-  // console.log("here I am");
-  // console.log(req.query);
   // const connection = sqlConnect();
   const procedureCall = `SELECT * from packs`;
 
@@ -103,6 +101,21 @@ app.get('/api/get-packs', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     } else {
       res.json(results);
+    }
+  });
+});
+
+app.get('/api/staples', async (req, res) => {
+  const { aspect, history } = req.query;
+  const procedureCall = `CALL StapleCounts(${aspect}, ${history})`;
+
+  
+  connection.query(procedureCall, (error, results) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    } else {
+      res.json(results[0]);
     }
   });
 });

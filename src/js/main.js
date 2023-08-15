@@ -1,11 +1,9 @@
 import { processHeroDecks } from "./process_heroes.js";
-// import { processAdamWarlockDecks } from "./adam_warlock.js";
-// import { processSpiderWomanDecks } from "./spider_woman.js";
 import { createHeroSelector } from "./hero_selector.js";
-import { checkAllPacks, disableRadios, getJSON, getSelectedRadioButtonValue, getSelectedPackIds, hamburger, loadHeaderFooter, uncheckAllPacks } from "./utils.js";
+import { checkAllPacks, disableRadios, getJSON, getSelectedRadioButtonValue, getSelectedPackIds, hamburger, loadHeaderFooter, showPacks, uncheckAllPacks } from "./utils.js";
 
-// console.log("hello world");
 const heroNamesData = await getJSON("/json/hero_names.json");
+
 loadHeaderFooter().then(header => {
   hamburger(header);
 });
@@ -19,6 +17,7 @@ const submitButton = document.getElementById("submitBtn");
 const radio2Div = document.getElementById("aspect2");
 const radio2 = document.getElementsByName("aspect2");
 const packs = document.getElementsByName("pack-selector");
+const showPacksBtn = document.getElementById("showPacksBtn");
 const checkAllButton = document.getElementById("check-all");
 const uncheckAllButton = document.getElementById("uncheck-all");
 
@@ -31,6 +30,7 @@ for (let i = 0; i < radio2.length; i++) {
   radio2[i].addEventListener("change", handleSelectionChange);
 }
 submitButton.addEventListener("click", handleSubmit);
+showPacksBtn.addEventListener("click", showPacks);
 checkAllButton.addEventListener("click", checkAllPacks);
 uncheckAllButton.addEventListener("click", uncheckAllPacks);
 
@@ -94,5 +94,3 @@ async function handleSubmit(event) {
     await processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList);
   }
 }
-
-

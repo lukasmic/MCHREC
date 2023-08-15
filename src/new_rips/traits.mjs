@@ -43,8 +43,6 @@ export async function updateTraits(connection, pack) {
                 }
                 // If the card has a matching master_code in the master_cards table,
                 // insert the associated traits_id and master_code into the card_traits table
-                const findMasterSql = `SELECT * FROM master_cards WHERE master_code = ?`;
-                const findMasterValues = [code];
 
                 const traitIdSql = `SELECT traits_id FROM traits WHERE trait_name = ?`;
 const traitIdValues = [trait];

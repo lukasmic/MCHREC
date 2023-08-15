@@ -5,6 +5,7 @@ export async function updateVillainSets(connection, pack) {
           cards.forEach(card => {
               const { pack_code, card_set_code, card_set_name, card_set_type_name_code, code } = card;
               let insertSql, cardListInsertSql;
+              console.log(pack_code, card_set_code, card_set_name, card_set_type_name_code, code);
 
               if (card_set_type_name_code === 'modular') {
                   // Insert into 'modulars' table
@@ -12,12 +13,12 @@ export async function updateVillainSets(connection, pack) {
                   // Insert into 'modular_cardlist' table
                   cardListInsertSql = `INSERT IGNORE INTO modular_cardlist (card_set_code, master_code) VALUES (?, ?)`;
 
-                  console.log(pack_code, card_set_code, card_set_name, card_set_type_name_code, code);
+                  
               } else if (card_set_type_name_code === 'villain') {
-                  // // Insert into 'villains' table
-                  // insertSql = `INSERT IGNORE INTO villains (card_set_code, card_set_name, pack_code) VALUES (?, ?, ?)`;
-                  // // Insert into 'villain_cardlist' table
-                  // cardListInsertSql = `INSERT IGNORE INTO villain_cardlist (card_set_code, master_code) VALUES (?, ?)`;
+                  // Insert into 'villains' table
+                  insertSql = `INSERT IGNORE INTO villains (card_set_code, card_set_name, pack_code) VALUES (?, ?, ?)`;
+                  // Insert into 'villain_cardlist' table
+                  cardListInsertSql = `INSERT IGNORE INTO villain_cardlist (card_set_code, master_code) VALUES (?, ?)`;
               }
 
               if (insertSql && cardListInsertSql) {
@@ -45,3 +46,4 @@ export async function updateVillainSets(connection, pack) {
           });
       });
 }
+

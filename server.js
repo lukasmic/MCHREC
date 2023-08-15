@@ -19,19 +19,19 @@ app.listen(3000, function() {
 let connection;
 
 // Add the handleDisconnect function here
-function handleDisconnect() {
-  connection = sqlConnect();
-  connection.connect(function(err) {
-    if(err) {
-      console.log('error when connecting to db:', err);
-      setTimeout(handleDisconnect, 2000);
-    }
-  });
+// function handleDisconnect() {
+//   connection = sqlConnect();
+//   connection.connect(function(err) {
+//     if(err) {
+//       console.log('error when connecting to db:', err);
+//       setTimeout(handleDisconnect, 2000);
+//     }
+//   });
 
   connection.on('error', function(err) {
     console.log('db error', err);
     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-      handleDisconnect();
+      // handleDisconnect();
     } else {
       throw err;
     }
@@ -39,7 +39,7 @@ function handleDisconnect() {
 }
 
 // Call handleDisconnect once when the server starts
-handleDisconnect();
+// handleDisconnect();
 
 
 
@@ -122,6 +122,16 @@ app.get('/api/staples', async (req, res) => {
 
 
 ripDeckData(connection)
+
+setInterval(() => {
+  connection.query('SELECT 1', (err) => {
+    if (err) {
+      console.error('Error pinging database:', err);
+    } else {
+      console.log('Pinged database successfully.');
+    }
+  });
+}, 15 * 60 * 1000);  // Ping every 15 minutes, for example
 
 
 // const twoDaysAgo = new Date();

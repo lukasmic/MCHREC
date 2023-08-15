@@ -17,6 +17,8 @@ app.listen(3000, function() {
 });
 
 let connection;
+connection = sqlConnect();
+
 
 // Add the handleDisconnect function here
 // function handleDisconnect() {
@@ -28,15 +30,15 @@ let connection;
 //     }
 //   });
 
-  connection.on('error', function(err) {
-    console.log('db error', err);
-    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-      // handleDisconnect();
-    } else {
-      throw err;
-    }
-  });
-}
+//   connection.on('error', function(err) {
+//     console.log('db error', err);
+//     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+//       // handleDisconnect();
+//     } else {
+//       throw err;
+//     }
+//   });
+// }
 
 // Call handleDisconnect once when the server starts
 // handleDisconnect();

@@ -62,7 +62,7 @@ export async function createHeroSelector(heroCardsData) {
   percentDiv.innerHTML = "<span>Sort by: </span>";
   percentDiv.setAttribute("id", "percentage-selector");
   const synergyRadio = createPercentRadio("synergy", true);
-  const percentageRadio = createPercentRadio("percentage");
+  const percentageRadio = createPercentRadio("popularity");
   percentDiv.appendChild(synergyRadio);
   percentDiv.appendChild(percentageRadio);
   selectorSection.appendChild(percentDiv);

@@ -105,5 +105,9 @@ export async function ripDeckData(connection) {
   });
 }
 
+
 // Call this function once per day to update the deck data
-setInterval(ripDeckData, 24 * 60 * 60 * 1000); // once per day
+export function startRipDeckDataInterval(connection) {
+  ripDeckData(connection);
+  setInterval(() => ripDeckData(connection), 24 * 60 * 60 * 1000);
+}

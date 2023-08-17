@@ -3,8 +3,8 @@ import { updateCardData, updateCardUrl } from "./src/new_rips/cards.mjs";
 import { updateHeroData } from "./src/new_rips/heroes.mjs";
 import { updateTraits } from "./src/new_rips/traits.mjs";
 import { updateVillainSets } from "./src/new_rips/villains.mjs";
-import { ripDeckData } from "./src/new_rips/decks.mjs";
-// import {sqlConnect} from "./src/js/utils.js";
+
+import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 import { sqlConnect } from "./src/js/server-utils.js";
 import express from "express";
 import dotenv from 'dotenv'; dotenv.config();
@@ -18,32 +18,6 @@ app.listen(3000, function() {
 
 let connection;
 connection = sqlConnect();
-
-
-// Add the handleDisconnect function here
-// function handleDisconnect() {
-//   connection = sqlConnect();
-//   connection.connect(function(err) {
-//     if(err) {
-//       console.log('error when connecting to db:', err);
-//       setTimeout(handleDisconnect, 2000);
-//     }
-//   });
-
-//   connection.on('error', function(err) {
-//     console.log('db error', err);
-//     if(err.code === 'PROTOCOL_CONNECTION_LOST') {
-//       // handleDisconnect();
-//     } else {
-//       throw err;
-//     }
-//   });
-// }
-
-// Call handleDisconnect once when the server starts
-// handleDisconnect();
-
-
 
 app.get('/api/calculate-synergy', async (req, res) => {
   const { herocode, heroAspect, percentageType, history, packs } = req.query;
@@ -123,7 +97,9 @@ app.get('/api/staples', async (req, res) => {
 });
 
 
-ripDeckData(connection)
+// ripDeckData(connection)
+
+startRipDeckDataInterval(connection);
 
 setInterval(() => {
   connection.query('SELECT 1', (err) => {
@@ -133,7 +109,7 @@ setInterval(() => {
       console.log('Pinged database successfully.');
     }
   });
-}, 2 * 60 * 1000);  // Ping every 15 minutes, for example
+}, 2.5 * 60 * 1000);  // Ping every 2.5 minutes
 
 
 // const twoDaysAgo = new Date();

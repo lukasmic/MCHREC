@@ -99,17 +99,17 @@ app.get('/api/staples', async (req, res) => {
 
 // ripDeckData(connection)
 
-startRipDeckDataInterval(connection);
+startRipDeckDataInterval(connection); 
 
-setInterval(() => {
-  connection.query('SELECT 1', (err) => {
-    if (err) {
-      console.error('Error pinging database:', err);
-    } else {
-      console.log('Pinged database successfully.');
-    }
-  });
-}, 2 * 60 * 1000);  // Ping every 2.5 minutes
+// setInterval(() => {
+//   connection.query('SELECT 1', (err) => {
+//     if (err) {
+//       console.error('Error pinging database:', err);
+//     } else {
+//       console.log('Pinged database successfully.');
+//     }
+//   });
+// }, 2 * 60 * 1000);  // Ping every 2.5 minutes
 
 
 // const twoDaysAgo = new Date();

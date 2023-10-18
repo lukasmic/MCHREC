@@ -9,7 +9,7 @@ export async function updateCardData(connection, pack) {
   .then(cards => {
 
     cards.forEach(card => {
-      const { code, pack_code, name, subname = null, type_code, imagesrc = null, text, faction_code, card_set_type_name_code = null, duplicate_of_code, url } = card;
+      const { code, pack_code, name, subname = null, type_code, imagesrc = null, text, faction_code, card_set_type_name_code = null, duplicate_of_code = null, url } = card;
     
       // query the aspects table to get the aspect_id
       const sql = `SELECT aspect_id FROM aspects WHERE aspect_name = ?`;
@@ -39,7 +39,7 @@ export async function updateCardData(connection, pack) {
 
         if(!duplicate_of_code) {
                   // insert the card into the master_cards table
-          const insertSql = `INSERT IGNORE INTO master_cards (master_code, name, subname, card_type, photo_url, text_box, aspect_id, card_url) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+          const insertSql = `INSERT IGNORE INTO master_cards (master_code, name, subname, card_type, photo_url, text_box, aspect_id, card_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
           const insertValues = [code, name, subname, type_code, imagesrc, text, aspect_id, url];
             
           connection.query(insertSql, insertValues, (error, results) => {
@@ -63,6 +63,7 @@ export async function updateCardData(connection, pack) {
         });
 
       });
+      return;
     });
     
   });

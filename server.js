@@ -3,7 +3,7 @@ import { updateCardData, updateCardUrl } from "./src/new_rips/cards.mjs";
 import { updateHeroData } from "./src/new_rips/heroes.mjs";
 import { updateTraits } from "./src/new_rips/traits.mjs";
 import { updateVillainSets } from "./src/new_rips/villains.mjs";
-
+import { ripDeckData } from "./src/new_rips/decks.mjs";
 import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 import { sqlConnect } from "./src/js/server-utils.js";
 import express from "express";
@@ -97,9 +97,9 @@ app.get('/api/staples', async (req, res) => {
 });
 
 
-// ripDeckData(connection)
+ripDeckData(connection)
 
-startRipDeckDataInterval(connection); 
+// startRipDeckDataInterval(connection); 
 
 // setInterval(() => {
 //   connection.query('SELECT 1', (err) => {
@@ -157,7 +157,7 @@ startRipDeckDataInterval(connection);
 
 // updatePackData(connection);
 
-// updateCardData(connection, "nebu");
+// updateCardData(connection, "angel");
 
 //also will have to manually insert new heroes into hero_names.json (probably the only JSON we're keeping)
 // updateHeroData(connection);

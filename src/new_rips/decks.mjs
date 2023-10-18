@@ -2,9 +2,9 @@ import fetch from "node-fetch";
 
 // export async function ripDeckData(connection,formattedDate) {
 //turn these on for day to day
-export async function ripDeckData(connection) {
+export async function ripDeckData(pool) {
   const twoDaysAgo = new Date();
-  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+  twoDaysAgo.setDate(twoDaysAgo.getDate() - 2); // *this is the number to change to go back in time*
   const formattedDate = twoDaysAgo.toISOString().slice(0, 10);
 
   // console.log(twoDaysAgo);
@@ -13,7 +13,7 @@ export async function ripDeckData(connection) {
   const sql = `SELECT * FROM decks WHERE date_creation = ?`;
   const values = [formattedDate];
 
-  connection.query(sql, values, (error, results) => {
+  pool.query(sql, values, (error, results) => {
     if (error) {
       console.log(error);
       return;
@@ -65,7 +65,7 @@ export async function ripDeckData(connection) {
         const values = [aspect];
           
         let aspect_id;
-        connection.query(sql, values, (error, results) => {
+        pool.query(sql, values, (error, results) => {
           if (error) {
             console.log(error);
             return;
@@ -78,7 +78,7 @@ export async function ripDeckData(connection) {
           // console.log(date_creation, investigator_code, aspect_id);
           const deckSql = `INSERT INTO decks (date_creation, master_code, aspect_id) VALUES (?, ?, ?)`;
           const deckValues = [date_creation, investigator_code, aspect_id];
-          connection.query(deckSql, deckValues, (error, results) => {
+          pool.query(deckSql, deckValues, (error, results) => {
             if (error) {
               console.log(error);
             }
@@ -91,7 +91,7 @@ export async function ripDeckData(connection) {
               const cardCode = slot.split(':')[0];
               const dlSql = `INSERT INTO decklists (decks_id, code) VALUES (?, ?)`;
               const dlValues = [decks_id, cardCode];
-              connection.query(dlSql, dlValues, (error, results) => {
+              pool.query(dlSql, dlValues, (error, results) => {
                 if (error) {
                   console.log(error);
                 }
@@ -107,7 +107,7 @@ export async function ripDeckData(connection) {
 
 
 // Call this function once per day to update the deck data
-export function startRipDeckDataInterval(connection) {
-  ripDeckData(connection);
-  setInterval(() => ripDeckData(connection), 24 * 60 * 60 * 1000);
+export function startRipDeckDataInterval(pool) {
+  ripDeckData(pool);
+  setInterval(() => ripDeckData(pool), 24 * 60 * 60 * 1000);
 }

@@ -1,13 +1,25 @@
-import { updatePackData } from "./src/new_rips/packs.mjs";
-import { updateCardData, updateCardUrl } from "./src/new_rips/cards.mjs";
-import { updateHeroData } from "./src/new_rips/heroes.mjs";
-import { updateTraits } from "./src/new_rips/traits.mjs";
-import { updateVillainSets } from "./src/new_rips/villains.mjs";
-import { ripDeckData } from "./src/new_rips/decks.mjs";
-import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
-import { sqlConnect } from "./src/js/server-utils.js";
+//server.js
+
+
+
+//this motherfucker MUST be at the top, especially above anything that requires database access
+import dotenv from 'dotenv'; 
+dotenv.config();
+console.log(process.env.MYSQL_HOST);
+console.log(process.env.MYSQL_USER);
 import express from "express";
-import dotenv from 'dotenv'; dotenv.config();
+
+//use these constantly
+import { createDatabasePool } from "./src/js/server-utils.js";
+import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
+
+//only use these as new releases come out
+// import { updatePackData } from "./src/new_rips/packs.mjs";
+// import { updateCardData, updateCardUrl } from "./src/new_rips/cards.mjs";
+// import { updateHeroData } from "./src/new_rips/heroes.mjs";
+// import { updateTraits } from "./src/new_rips/traits.mjs";
+// import { updateVillainSets } from "./src/new_rips/villains.mjs";
+
 
 const app = express();
 app.use(express.static("src"));
@@ -16,8 +28,11 @@ app.listen(3000, function() {
   console.log("Server listening on port 3000");
 });
 
-let connection;
-connection = sqlConnect();
+
+// let connection;
+// connection = sqlConnect();
+
+const pool = createDatabasePool();
 
 app.get('/api/calculate-synergy', async (req, res) => {
   const { herocode, heroAspect, percentageType, history, packs } = req.query;
@@ -38,7 +53,7 @@ app.get('/api/calculate-synergy', async (req, res) => {
       // console.log(procedureCall);
     }
   
-  connection.query(procedureCall, (error, results) => {
+  pool.query(procedureCall, (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -56,7 +71,7 @@ app.get('/api/aspect-name', async (req, res) => {
   const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ${aspect}`;
 
   
-  connection.query(procedureCall, (error, results) => {
+  pool.query(procedureCall, (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -71,7 +86,7 @@ app.get('/api/get-packs', async (req, res) => {
   const procedureCall = `SELECT * from packs`;
 
   
-  connection.query(procedureCall, (error, results) => {
+  pool.query(procedureCall, (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -86,7 +101,7 @@ app.get('/api/staples', async (req, res) => {
   const procedureCall = `CALL StapleCounts(${aspect}, ${history})`;
 
   
-  connection.query(procedureCall, (error, results) => {
+  pool.query(procedureCall, (error, results) => {
     if (error) {
       console.log(error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -96,10 +111,13 @@ app.get('/api/staples', async (req, res) => {
   });
 });
 
+// I begin with a call of ripDeckData() before seting the timer
+startRipDeckDataInterval(pool); 
 
-ripDeckData(connection)
 
-// startRipDeckDataInterval(connection); 
+
+
+// ripDeckData(connection)
 
 // setInterval(() => {
 //   connection.query('SELECT 1', (err) => {
@@ -153,7 +171,11 @@ ripDeckData(connection)
 
 
 
+
+
 //here lies the gaggle of junk we need to do as new releases come out
+
+
 
 // updatePackData(connection);
 

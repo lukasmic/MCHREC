@@ -2,9 +2,7 @@ import { findHeroByCode, getAspectName } from "./utils.js";
 
 export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList) {
   // console.log(herocode, heroAspect, percentageType, historyOption, packList);
-  const selectedPacksString = packList.join(",");
-  const response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}&history=${historyOption}&packs=${selectedPacksString}`);
-  const results = await response.json();
+  
   // console.log(results);
 
   //Let's shoot the template literals into two different functions
@@ -15,25 +13,34 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
   const heroName = findHeroByCode(heroNamesData, herocode);
 
   const cardResultsDiv = document.getElementById("card-results");
-  cardResultsDiv.innerHTML = "";
+  cardResultsDiv.innerHTML = '<h1 class="center">Loading results, please wait...</h1>';
 
-  const cardInfo = results.map(row => {
-    return {
-      code: row.master_code,
-      cardName: row.name,
-      cardPhoto: row.photo_url,
-      popularity: row.popularity,
-      synergy: row.synergy,
-      cardUrl: row.card_url,
-      totalChosenDecks: row.chosen_count
-    }; 
-  });
-  // console.log(cardInfo);
 
-  const aspectName = (heroAspect == 0) ? "" : await getAspectName(heroAspect);
 
-  buildHeroHeader(heroName, aspectName, cardInfo[0].totalChosenDecks, heroHeaderDiv);
-  buildCardDiv(cardInfo, cardInfo[0].totalChosenDecks, cardResultsDiv);
+  try {
+    const selectedPacksString = packList.join(",");
+    const response = await fetch(`/api/calculate-synergy?herocode=${herocode}&heroAspect=${heroAspect}&percentageType=${percentageType}&history=${historyOption}&packs=${selectedPacksString}`);
+    const results = await response.json();
+  
+    const cardInfo = results.map(row => {
+      return {
+        code: row.master_code,
+        cardName: row.name,
+        cardPhoto: row.photo_url,
+        popularity: row.popularity,
+        synergy: row.synergy,
+        cardUrl: row.card_url,
+        totalChosenDecks: row.chosen_count
+      }; 
+    });
+    // console.log(cardInfo);
+    const aspectName = (heroAspect == 0) ? "" : await getAspectName(heroAspect);
+    buildHeroHeader(heroName, aspectName, cardInfo[0].totalChosenDecks, heroHeaderDiv);
+    buildCardDiv(cardInfo, cardInfo[0].totalChosenDecks, cardResultsDiv);
+  } catch (error) {
+    console.error('Error processing hero decks:', error);
+    cardResultsDiv.innerHTML = '<h1 class="center">Error loading results. Please try hitting the button again, refresh the page, or contact the creator on Reddit at the bottom of the page.</h1>'; // Show error message to the user
+  }
 }
 
 
@@ -71,5 +78,6 @@ export function buildCardDiv(cardInfo, totalChosenDecks, cardResultsDiv) {
     }
     ul.appendChild(li);
   });
+  cardResultsDiv.innerHTML = ""; //clear the loading message before proceeding
   cardResultsDiv.appendChild(ul);
 }

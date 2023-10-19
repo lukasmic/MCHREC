@@ -42,29 +42,37 @@ async function displayStaples(aspect, history) {
     return;
   }
 
-  const response = await fetch(`/api/staples?aspect=${aspect}&history=${history}`);
-  const results = await response.json();
-
-  const cardInfo = results.map(row => {
-    return {
-      code: row.master_code,
-      cardName: row.name,
-      cardPhoto: row.photo_url,
-      popularity: row.popularity,
-      cardUrl: row.card_url,
-      deckCount: row.deck_count
-    }; 
-  });
-
-    const heroHeaderDiv = document.getElementById("staple-header");
-    const aspectName = (aspect == 0) ? "" : await getAspectName(aspect);
-    const Aspect = capitalize(aspectName);
-    //clear it in case it's a resubmit
-    heroHeaderDiv.innerHTML = `<h2>${Aspect} Staples</h2>`;
-
+  try {
     const cardResultsDiv = document.getElementById("staple-results");
-    cardResultsDiv.innerHTML = "";
-    buildCardDiv(cardInfo, cardResultsDiv, aspect);
+    cardResultsDiv.innerHTML = '<h1 class="center">Loading results, please wait...</h1>';
+    
+    const response = await fetch(`/api/staples?aspect=${aspect}&history=${history}`);
+    const results = await response.json();
+    const cardInfo = results.map(row => {
+      return {
+        code: row.master_code,
+        cardName: row.name,
+        cardPhoto: row.photo_url,
+        popularity: row.popularity,
+        cardUrl: row.card_url,
+        deckCount: row.deck_count
+      }; 
+    });
+      const heroHeaderDiv = document.getElementById("staple-header");
+      const aspectName = (aspect == 0) ? "" : await getAspectName(aspect);
+      const Aspect = capitalize(aspectName);
+      //clear it in case it's a resubmit
+      heroHeaderDiv.innerHTML = `<h2>${Aspect} Staples</h2>`;
+  
+      
+      cardResultsDiv.innerHTML = "";
+      buildCardDiv(cardInfo, cardResultsDiv, aspect);
+  } catch (error) {
+    console.error('Error processing staple call:', error);
+    cardResultsDiv.innerHTML = '<h1 class="center">Error loading results. Please try again, refresh the page, or contact the creator on Reddit at the bottom of the page.</h1>'; // Show error message to the user
+  }
+
+
 }
 
 

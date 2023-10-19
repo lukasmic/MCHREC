@@ -76,7 +76,8 @@ export async function createHeroSelector(heroCardsData) {
 
   const resPG = document.createElement("p");
   resPG.classList.add("center");
-  resPG.textContent = "Results may take a few seconds to process.";
+  // resPG.textContent = "Results may take a few seconds to process.";
+  resPG.innerHTML = 'Results may take a few seconds to process.<br>Unsure what these numbers mean? Read the <a href="/about.html">About page</a> to learn more!'
   selectorSection.appendChild(resPG);
 }
 

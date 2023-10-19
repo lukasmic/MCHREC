@@ -1,5 +1,5 @@
 // server-utils.js
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
 
 export function createDatabasePool () {
 
@@ -10,7 +10,7 @@ export function createDatabasePool () {
     database: process.env.MYSQL_DATABASE,
     port: process.env.MYSQL_PORT,
     waitForConnections: true,
-    connectionLimit: 10,  // Adjust as needed
+    connectionLimit: 10,  // Adjust as needed 
     queueLimit: 0,
   });
 

@@ -49,6 +49,7 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   const isSynergy = percentageType == "synergy";
   const synPerc = isSynergy ? true : false;
   let procedureCall;
+  let queryParameters;
 
   if (herocode == "21031a") {
     procedureCall = 'CALL CalculateAdamWarlockSynergy(?, ?, ?)';
@@ -64,8 +65,29 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
     queryParameters = [herocode, heroAspect, synPerc, history, packs];
   }
   
-  try {
+  try { 
+    // console.log(procedureCall);
+    // console.log(queryParameters);
     // Execute the procedure with the appropriate parameters
+    const result = await pool.query(procedureCall, queryParameters);
+    // console.log(result);  // Let's see what this logs
+  
+    const [rows, fields] = result;  // Then, if the result is as expected, you can destructure it
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error); // Logging the error for debugging.
+    res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
+  }
+  
+}));
+
+app.get('/api/aspect-name', asyncHandler(async (req, res) => {
+  const aspect = req.query.aspect;
+  const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ?`;
+  const queryParameters = [aspect];
+
+  
+  try {
     const [rows, fields] = await pool.execute(procedureCall, queryParameters);
 
     res.json(rows[0]);
@@ -75,33 +97,29 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   }
 }));
 
-app.get('/api/aspect-name', asyncHandler(async (req, res) => {
-  const aspect = req.query.aspect;
-  const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ${aspect}`;
-
-  
-  try {
-    const [rows, fields] = await pool.execute(procedureCall);
-
-    res.json(rows[0]);
-  } catch (error) {
-    console.error(error); // Logging the error for debugging.
-    res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
-  }
-}));
-
 app.get('/api/get-packs', asyncHandler(async (req, res) => {
-  const procedureCall = `SELECT * from packs`;
+  const procedureCall = `SELECT * FROM packs`;
 
   try {
-    const [rows, fields] = await pool.execute(procedureCall);
+    // Using pool.query instead of pool.execute for non-parameterized queries.
+    // Also, since you're using the Promise-based client, you should await the query instead of passing a callback.
+    const [result, fields] = await pool.query(procedureCall);
 
-    res.json(rows[0]);
+    // Check if the result is present and not empty.
+    if (!result || result.length === 0) {
+      throw new Error('No result returned from the query or the table is empty.');
+    }
+
+    // If everything's fine, send back the result.
+    res.json(result);
   } catch (error) {
-    console.error(error); // Logging the error for debugging.
+    console.error(error); // Logging the error for debugging purposes.
     res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
   }
 }));
+
+
+
 
 app.get('/api/staples', asyncHandler(async (req, res) => {
   const { aspect, history } = req.query;

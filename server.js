@@ -1,12 +1,8 @@
 //server.js
-
-
-
 //this motherfucker MUST be at the top, especially above anything that requires database access
 import dotenv from 'dotenv'; 
 dotenv.config();
-console.log(process.env.MYSQL_HOST);
-console.log(process.env.MYSQL_USER);
+
 import express from "express";
 
 //use these constantly
@@ -24,103 +20,118 @@ import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 const app = express();
 app.use(express.static("src"));
 
-app.listen(3000, function() {
-  console.log("Server listening on port 3000");
+
+// Global Error Handler - This middleware function is for handling errors globally.
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
-
-
-// let connection;
-// connection = sqlConnect();
 
 const pool = createDatabasePool();
 
-app.get('/api/calculate-synergy', async (req, res) => {
+// Handling pool or connection errors. It's essential to have this to catch connection errors.
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle database connection:', err);
+  if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+      pool = createDatabasePool(); // Recreate the pool if connection lost
+  } else {
+      throw err; // throw error if it's another type of error
+  }
+});
+
+// Middleware to handle async/await errors. It catches errors and passes them to the global error handler.
+const asyncHandler = fn => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+
+app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   const { herocode, heroAspect, percentageType, history, packs } = req.query;
   const isSynergy = percentageType == "synergy";
   const synPerc = isSynergy ? true : false;
   let procedureCall;
 
-    if (herocode == "21031a") {
-      procedureCall = `CALL CalculateAdamWarlockSynergy(${synPerc}, ${history}, '${packs}')`; 
-      // console.log(procedureCall); 
-    } else if (herocode == "33001a" || herocode == "18001a") {
-      procedureCall = `CALL CalculateCyclopsSynergy('${herocode}', ${heroAspect}, ${synPerc}, ${history}, '${packs}')`;
-    } else if (herocode == "04031a") {
-      procedureCall = `CALL CalculateSpiderWomanSynergy(${heroAspect}, ${synPerc}, ${history}, '${packs}')`;
-      // console.log(procedureCall); 
-    } else {
-      procedureCall = `CALL CalculateSynergy('${herocode}', ${heroAspect}, ${synPerc}, ${history}, '${packs}')`;
-      // console.log(procedureCall);
-    }
+  if (herocode == "21031a") {
+    procedureCall = 'CALL CalculateAdamWarlockSynergy(?, ?, ?)';
+    queryParameters = [synPerc, history, packs];
+  } else if (herocode == "33001a" || herocode == "18001a") {
+    procedureCall = 'CALL CalculateCyclopsSynergy(?, ?, ?, ?, ?)';
+    queryParameters = [herocode, heroAspect, synPerc, history, packs];
+  } else if (herocode == "04031a") {
+    procedureCall = 'CALL CalculateSpiderWomanSynergy(?, ?, ?, ?)';
+    queryParameters = [heroAspect, synPerc, history, packs];
+  } else {
+    procedureCall = 'CALL CalculateSynergy(?, ?, ?, ?, ?)';
+    queryParameters = [herocode, heroAspect, synPerc, history, packs];
+  }
   
-  pool.query(procedureCall, (error, results) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results[0]);
-    }
-  });
-});
+  try {
+    // Execute the procedure with the appropriate parameters
+    const [rows, fields] = await pool.execute(procedureCall, queryParameters);
 
-app.get('/api/aspect-name', async (req, res) => {
-  // console.log("here I am");
-  // console.log(req.query);
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error); // Logging the error for debugging.
+    res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
+  }
+}));
+
+app.get('/api/aspect-name', asyncHandler(async (req, res) => {
   const aspect = req.query.aspect;
-  // const connection = sqlConnect();
   const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ${aspect}`;
 
   
-  pool.query(procedureCall, (error, results) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results[0]);
-    }
-  });
-});
+  try {
+    const [rows, fields] = await pool.execute(procedureCall);
 
-app.get('/api/get-packs', async (req, res) => {
-  // const connection = sqlConnect();
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error); // Logging the error for debugging.
+    res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
+  }
+}));
+
+app.get('/api/get-packs', asyncHandler(async (req, res) => {
   const procedureCall = `SELECT * from packs`;
 
-  
-  pool.query(procedureCall, (error, results) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results);
-    }
-  });
-});
+  try {
+    const [rows, fields] = await pool.execute(procedureCall);
 
-app.get('/api/staples', async (req, res) => {
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error); // Logging the error for debugging.
+    res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
+  }
+}));
+
+app.get('/api/staples', asyncHandler(async (req, res) => {
   const { aspect, history } = req.query;
-  const procedureCall = `CALL StapleCounts(${aspect}, ${history})`;
+  const procedureCall = `CALL StapleCounts(?, ?)`;
+  const queryParameters = [aspect, history];
 
   
-  pool.query(procedureCall, (error, results) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    } else {
-      res.json(results[0]);
-    }
-  });
-});
+  try {
+    // Execute the procedure with the appropriate parameters
+    const [rows, fields] = await pool.execute(procedureCall, queryParameters);
 
-// I begin with a call of ripDeckData() before seting the timer
+    res.json(rows[0]);
+  } catch (error) {
+    console.error(error); // Logging the error for debugging.
+    res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
+  }
+}));
+
+// I begin with a call of ripDeckData() before setting the timer
 startRipDeckDataInterval(pool); 
 
-
+app.listen(3000, function() {
+  console.log("Server listening on port 3000");
+});
 
 
 // ripDeckData(connection)
 
 // setInterval(() => {
-//   connection.query('SELECT 1', (err) => {
+//   pool.query('SELECT 1', (err) => {
 //     if (err) {
 //       console.error('Error pinging database:', err);
 //     } else {

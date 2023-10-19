@@ -81,8 +81,28 @@ export async function ripDeckData(pool) {
 }
 
 
+//if it fails, we redo it
+async function ripDeckDataWithRetry(pool, retries = 3) {
+  while (retries--) {
+    try {
+      await ripDeckData(pool); // Your existing function as is
+      break; // If successful, break out of the loop
+    } catch (err) {
+      if (retries > 0 && (err.code === 'ECONNRESET' || err.code === 'PROTOCOL_CONNECTION_LOST')) {
+        console.error('Error in ripDeckData, retrying...', err);
+        await delay(3000); // Wait for 3 seconds before retrying
+        continue;
+      } else {
+        console.error('Failed to execute ripDeckData after retries or unrecoverable error:', err);
+        break; // If out of retries or unrecoverable error, break out of the loop
+      }
+    }
+  }
+}
+
+
 // Call this function once per day to update the deck data
 export function startRipDeckDataInterval(pool) {
-  ripDeckData(pool);
-  setInterval(() => ripDeckData(pool), 24 * 60 * 60 * 1000);
+  ripDeckDataWithRetry(pool);
+  setInterval(() => ripDeckDataWithRetry(pool), 24 * 60 * 60 * 1000);
 }

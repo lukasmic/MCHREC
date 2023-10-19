@@ -116,11 +116,7 @@ export function createHistoryRadio(option) {
   }
   label.appendChild(input);
   //visible text
-  if (option == 900) {
-    label.append("All time")
-  } else {
-    label.append(option);
-  }
+  label.append(option);
   return label;
 }
 

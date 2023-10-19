@@ -43,6 +43,26 @@ pool.on('error', (err) => {
 const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
+async function queryWithRetry(pool, procedureCall, queryParameters = [], retries = 3) {
+  while (retries--) {
+    try {
+      return await pool.query(procedureCall, queryParameters);
+    } catch (err) {
+      if (err.code === 'ECONNRESET' && retries > 0) {
+        console.error('Connection reset by server, retrying...');
+        await delay(3000); // delay for 3 seconds before retrying
+        continue;
+      }
+      throw err; // if it's not ECONNRESET or no retries left, rethrow
+    }
+  }
+}
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 
 app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   const { herocode, heroAspect, percentageType, history, packs } = req.query;
@@ -50,7 +70,6 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   const synPerc = isSynergy ? true : false;
   let procedureCall;
   let queryParameters;
-
   if (herocode == "21031a") {
     procedureCall = 'CALL CalculateAdamWarlockSynergy(?, ?, ?)';
     queryParameters = [synPerc, history, packs];
@@ -64,12 +83,11 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
     procedureCall = 'CALL CalculateSynergy(?, ?, ?, ?, ?)';
     queryParameters = [herocode, heroAspect, synPerc, history, packs];
   }
-  
   try { 
     // console.log(procedureCall);
     // console.log(queryParameters);
     // Execute the procedure with the appropriate parameters
-    const result = await pool.query(procedureCall, queryParameters);
+    const result = await queryWithRetry(pool, procedureCall, queryParameters);
     // console.log(result);  // Let's see what this logs
   
     const [rows, fields] = result;  // Then, if the result is as expected, you can destructure it
@@ -81,6 +99,7 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   
 }));
 
+
 app.get('/api/aspect-name', asyncHandler(async (req, res) => {
   const aspect = req.query.aspect;
   const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ?`;
@@ -88,7 +107,7 @@ app.get('/api/aspect-name', asyncHandler(async (req, res) => {
 
   
   try {
-    const [rows, fields] = await pool.execute(procedureCall, queryParameters);
+    const [rows, fields] = await queryWithRetry(pool, procedureCall, queryParameters);
 
     res.json(rows[0]);
   } catch (error) {
@@ -97,13 +116,14 @@ app.get('/api/aspect-name', asyncHandler(async (req, res) => {
   }
 }));
 
+
 app.get('/api/get-packs', asyncHandler(async (req, res) => {
   const procedureCall = `SELECT * FROM packs`;
 
   try {
     // Using pool.query instead of pool.execute for non-parameterized queries.
     // Also, since you're using the Promise-based client, you should await the query instead of passing a callback.
-    const [result, fields] = await pool.query(procedureCall);
+    const [result, fields] = await queryWithRetry(pool, procedureCall);
 
     // Check if the result is present and not empty.
     if (!result || result.length === 0) {
@@ -119,8 +139,6 @@ app.get('/api/get-packs', asyncHandler(async (req, res) => {
 }));
 
 
-
-
 app.get('/api/staples', asyncHandler(async (req, res) => {
   const { aspect, history } = req.query;
   const procedureCall = `CALL StapleCounts(?, ?)`;
@@ -129,7 +147,7 @@ app.get('/api/staples', asyncHandler(async (req, res) => {
   
   try {
     // Execute the procedure with the appropriate parameters
-    const [rows, fields] = await pool.execute(procedureCall, queryParameters);
+    const [rows, fields] = await queryWithRetry(pool, procedureCall, queryParameters);
 
     res.json(rows[0]);
   } catch (error) {

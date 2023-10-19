@@ -54,7 +54,7 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   if (herocode == "21031a") {
     procedureCall = 'CALL CalculateAdamWarlockSynergy(?, ?, ?)';
     queryParameters = [synPerc, history, packs];
-  } else if (herocode == "33001a" || herocode == "18001a") {
+  } else if (herocode == "33001a" || herocode == "18001a" || herocode == "40001a") { //Cyclops, Gamora, and Cable
     procedureCall = 'CALL CalculateCyclopsSynergy(?, ?, ?, ?, ?)';
     queryParameters = [herocode, heroAspect, synPerc, history, packs];
   } else if (herocode == "04031a") {

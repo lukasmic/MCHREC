@@ -18,6 +18,11 @@ export function createDatabasePool () {
 }
 
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
 export async function queryWithRetry(pool, procedureCall, queryParameters = [], retries = 5) {
   while (retries--) {
     try {

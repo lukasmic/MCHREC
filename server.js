@@ -44,12 +44,6 @@ const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
 
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-
 app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   const { herocode, heroAspect, percentageType, history, packs } = req.query;
   const isSynergy = percentageType == "synergy";

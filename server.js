@@ -6,7 +6,7 @@ dotenv.config();
 import express from "express";
 
 //use these constantly
-import { createDatabasePool } from "./src/js/server-utils.js";
+import { createDatabasePool, queryWithRetry } from "./src/js/server-utils.js";
 import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 
 //only use these as new releases come out
@@ -43,25 +43,11 @@ pool.on('error', (err) => {
 const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
-async function queryWithRetry(pool, procedureCall, queryParameters = [], retries = 3) {
-  while (retries--) {
-    try {
-      return await pool.query(procedureCall, queryParameters);
-    } catch (err) {
-      if (err.code === 'ECONNRESET' && retries > 0) {
-        console.error('Connection reset by server, retrying...');
-        await delay(3000); // delay for 3 seconds before retrying
-        continue;
-      }
-      throw err; // if it's not ECONNRESET or no retries left, rethrow
-    }
-  }
-}
+
 
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 
 
 app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
@@ -84,19 +70,13 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
     queryParameters = [herocode, heroAspect, synPerc, history, packs];
   }
   try { 
-    // console.log(procedureCall);
-    // console.log(queryParameters);
-    // Execute the procedure with the appropriate parameters
     const result = await queryWithRetry(pool, procedureCall, queryParameters);
-    // console.log(result);  // Let's see what this logs
-  
     const [rows, fields] = result;  // Then, if the result is as expected, you can destructure it
     res.json(rows[0]);
   } catch (error) {
     console.error(error); // Logging the error for debugging.
     res.status(500).json({ error: 'Internal Server Error' }); // Responding with a 500 status code and a generic error message.
   }
-  
 }));
 
 
@@ -104,11 +84,8 @@ app.get('/api/aspect-name', asyncHandler(async (req, res) => {
   const aspect = req.query.aspect;
   const procedureCall = `SELECT aspect_name FROM aspects WHERE aspect_id = ?`;
   const queryParameters = [aspect];
-
-  
   try {
     const [rows, fields] = await queryWithRetry(pool, procedureCall, queryParameters);
-
     res.json(rows[0]);
   } catch (error) {
     console.error(error); // Logging the error for debugging.
@@ -119,17 +96,14 @@ app.get('/api/aspect-name', asyncHandler(async (req, res) => {
 
 app.get('/api/get-packs', asyncHandler(async (req, res) => {
   const procedureCall = `SELECT * FROM packs`;
-
   try {
     // Using pool.query instead of pool.execute for non-parameterized queries.
     // Also, since you're using the Promise-based client, you should await the query instead of passing a callback.
     const [result, fields] = await queryWithRetry(pool, procedureCall);
-
     // Check if the result is present and not empty.
     if (!result || result.length === 0) {
       throw new Error('No result returned from the query or the table is empty.');
     }
-
     // If everything's fine, send back the result.
     res.json(result);
   } catch (error) {
@@ -143,12 +117,9 @@ app.get('/api/staples', asyncHandler(async (req, res) => {
   const { aspect, history } = req.query;
   const procedureCall = `CALL StapleCounts(?, ?)`;
   const queryParameters = [aspect, history];
-
-  
   try {
     // Execute the procedure with the appropriate parameters
     const [rows, fields] = await queryWithRetry(pool, procedureCall, queryParameters);
-
     res.json(rows[0]);
   } catch (error) {
     console.error(error); // Logging the error for debugging.
@@ -212,16 +183,7 @@ app.listen(3000, function() {
 
 
 
-
-
-
-
-
-
-
-
 //here lies the gaggle of junk we need to do as new releases come out
-
 
 
 // updatePackData(connection);
@@ -262,12 +224,6 @@ app.listen(3000, function() {
 //   });
 // });
 
-
-
-
-
-
-
 // const startDate = new Date();
 // startDate.setDate(startDate.getDate() - 60); // Set the start date 1000 days back
 
@@ -294,7 +250,3 @@ app.listen(3000, function() {
 
 // // Start the loop
 // task();
-
-
-
-

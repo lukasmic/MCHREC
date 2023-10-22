@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { queryWithRetry } from "../js/server-utils.js";
 
 // export async function ripDeckData(connection,formattedDate) {
 //turn these on for day to day
@@ -11,7 +12,7 @@ export async function ripDeckData(pool) {
   const values = [formattedDate];
 
   try {
-    const [results] = await pool.query(sql, values);
+    const [results] = await queryWithRetry(pool, sql, values);
 
     // if there is any data, stop what we're doing
     if (results.length != 0) {

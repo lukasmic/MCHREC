@@ -78,6 +78,15 @@ export function getSelectedPackIds(packsCheckBoxes) {
 }
 
 
+// Function to retrieve the name of the selected radio button
+export function getSelectedRadioButtonText(radioSet) {
+  for (let i = 0; i < radioSet.length; i++) {
+    return radioSet[i].textContent.trim();
+  }
+  return null;
+}
+
+
 // Function to retrieve the value of the selected radio button
 export function getSelectedRadioButtonValue(radioSet) {
   for (let i = 0; i < radioSet.length; i++) {

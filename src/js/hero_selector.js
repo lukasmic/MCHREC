@@ -1,4 +1,4 @@
-import { capitalize } from "./utils.js";
+import { capitalize, getSelectedRadioButtonText } from "./utils.js";
 
 export async function createHeroSelector(heroCardsData) {
   const response = await fetch(`/api/get-packs`);
@@ -90,16 +90,23 @@ export function createRadios(radioName, basic = false) {
   if (basic) {
     aspects.push("basic");
   }
+  //because basic is still aspect_id 5, we need to do pool different
+  aspects.push("pool");
   // aspects.forEach(createRadio);
   aspects.forEach((aspect, index) => {
     const radioLabel = document.createElement("label");
     const radioInput = document.createElement("input");
     radioInput.setAttribute("type", "radio");
     radioInput.setAttribute("name", radioName);
+    //This always worked, until we got to the pool aspect
     radioInput.setAttribute("value", index+1);
+
     radioLabel.appendChild(radioInput);
     //visible text
     radioLabel.append(capitalize(aspect));
+    if(radioInput.parentNode.textContent.trim() == "Pool") {
+      radioInput.setAttribute("value", 8);
+    }
     div.appendChild(radioLabel);
   });
   return div;

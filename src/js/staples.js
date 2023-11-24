@@ -92,7 +92,7 @@ export function buildCardDiv(cardInfo, cardResultsDiv) {
     if (cardPhoto == "" || cardPhoto === "") {
       li.innerHTML += `<img src="/images/not_found.png"><br>`;
     } else {
-      li.innerHTML += `<img src="https://marvelcdb.com/${cardPhoto}"><br>`;
+      li.innerHTML += `<img src="${cardPhoto}"><br>`;
     }
     li.innerHTML += `${popularity}% of ${deckCount} decks<br>`;
     ul.appendChild(li);

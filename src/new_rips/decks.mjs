@@ -1,3 +1,4 @@
+//decks.mjs
 import fetch from "node-fetch";
 import { queryWithRetry } from "../js/server-utils.js";
 
@@ -58,7 +59,7 @@ export async function ripDeckData(pool) {
   
         const [aspectResults] = await pool.query(aspectSql, aspectValues);
         if (aspectResults.length === 0) {
-          throw new Error('Aspect not found in the database');
+          throw new Error(`Aspect not found in the database ${aspect}`);
         }
         const aspect_id = aspectResults[0].aspect_id;
   

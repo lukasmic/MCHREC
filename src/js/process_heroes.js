@@ -67,7 +67,7 @@ export function buildCardDiv(cardInfo, totalChosenDecks, cardResultsDiv) {
     if (cardPhoto == "" || cardPhoto === "") {
       li.innerHTML += `<img src="/images/not_found.png" alt="Image of ${cardName}"><br>`;
     } else {
-      li.innerHTML += `<img src="https://marvelcdb.com/${cardPhoto}" alt="Image of ${cardName}"><br>`;
+      li.innerHTML += `<img src="${cardPhoto}" alt="Image of ${cardName}"><br>`;
     }
     li.innerHTML += `${popularity}% of ${totalChosenDecks} decks<br>`;
     //positive vs negative synergy

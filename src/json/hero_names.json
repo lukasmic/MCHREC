@@ -28,6 +28,9 @@
 {"code":"33001a",
 "heroname":"Cyclops",
 "alter_ego": "Scott Summers"},
+{"code":"44001a",
+"heroname":"Deadpool",
+"alter_ego": "Wade Wilson"},
 {"code":"09001a",
 "heroname":"Doctor Strange",
 "alter_ego": "Stephen Strange"},
@@ -188,4 +191,10 @@
   "code": "35001a",
   "heroname": "Wolverine",
   "alter_ego": "Logan"
-}]
+},
+{
+  "code": "43001a",
+  "heroname": "X-23",
+  "alter_ego": "Laura Kinney"
+}
+]

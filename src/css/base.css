@@ -29,6 +29,10 @@ label {
   padding: 1px;
 }
 
+.warning {
+  color: red;
+}
+
 
 /* hamburger navigation */
 

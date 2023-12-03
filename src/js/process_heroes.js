@@ -1,4 +1,4 @@
-import { findHeroByCode, getAspectName } from "./utils.js";
+import { findHeroInfoByCode, getAspectName } from "./utils.js";
 
 export async function processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList) {
   // console.log(herocode, heroAspect, percentageType, historyOption, packList);
@@ -10,7 +10,7 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
   const heroHeaderDiv = document.getElementById("hero-header");
   // clear it in case it's a resubmit
   heroHeaderDiv.innerHTML = "";
-  const heroName = findHeroByCode(heroNamesData, herocode);
+  
 
   const cardResultsDiv = document.getElementById("card-results");
   cardResultsDiv.innerHTML = '<h1 class="center">Loading results, please wait...</h1>';
@@ -35,7 +35,7 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
     });
     // console.log(cardInfo);
     const aspectName = (heroAspect == 0) ? "" : await getAspectName(heroAspect);
-    buildHeroHeader(heroName, aspectName, cardInfo[0].totalChosenDecks, heroHeaderDiv);
+    buildHeroHeader(heroNamesData, herocode, aspectName, cardInfo[0].totalChosenDecks, heroHeaderDiv);
     buildCardDiv(cardInfo, cardInfo[0].totalChosenDecks, cardResultsDiv);
   } catch (error) {
     console.error('Error processing hero decks:', error);
@@ -44,7 +44,28 @@ export async function processHeroDecks(herocode, heroAspect, heroNamesData, perc
 }
 
 
-function buildHeroHeader(heroName, aspectName, totalChosenDecks, heroHeaderDiv) {
+function buildHeroHeader(heroNamesData, herocode, aspectName, totalChosenDecks, heroHeaderDiv) {
+  const { heroName, heroPhoto, alterPhoto } = findHeroInfoByCode(heroNamesData, herocode);
+
+
+  let ul = document.createElement('ul');
+
+  let liHero = document.createElement('li');
+  let imgHero = document.createElement('img');
+  imgHero.src = heroPhoto;
+  imgHero.alt = `photo of ${heroName} hero`;
+  liHero.appendChild(imgHero);
+
+  let liAlter = document.createElement('li');
+  let imgAlter = document.createElement('img');
+  imgAlter.src = alterPhoto;
+  imgAlter.alt = `photo of ${heroName} alter-ego`;
+  liAlter.appendChild(imgAlter);
+
+  ul.appendChild(liHero);
+  ul.appendChild(liAlter);
+  heroHeaderDiv.appendChild(ul);
+
   const heroHeader = document.createElement("h3");
   heroHeader.textContent = `Selected Hero: ${heroName} (${totalChosenDecks} ${aspectName} decks)`;
   heroHeaderDiv.appendChild(heroHeader);
@@ -65,9 +86,9 @@ export function buildCardDiv(cardInfo, totalChosenDecks, cardResultsDiv) {
     // console.log(cardPhoto);
     //in case of bad photo, use placeholder
     if (cardPhoto == "" || cardPhoto === "") {
-      li.innerHTML += `<img src="/images/not_found.png" alt="Image of ${cardName}"><br>`;
+      li.innerHTML += `<img src="/images/not_found.png" alt="Image of card ${cardName}"><br>`;
     } else {
-      li.innerHTML += `<img src="${cardPhoto}" alt="Image of ${cardName}"><br>`;
+      li.innerHTML += `<img src="${cardPhoto}" alt="Image of card ${cardName}"><br>`;
     }
     li.innerHTML += `${popularity}% of ${totalChosenDecks} decks<br>`;
     //positive vs negative synergy

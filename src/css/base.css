@@ -29,6 +29,10 @@ label {
   padding: 1px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .warning {
   color: red;
 }
@@ -59,7 +63,6 @@ nav {
 }
 
 nav ul {
-  list-style-type: none;
   padding: 0;
   margin: 0;
 }
@@ -102,8 +105,8 @@ nav ul.open {display: block;}
   display: block;
 }
 
+
 #card-results ul, #staple-results ul {
-  list-style-type: none;
   padding: 0;
   margin: 0;
 }
@@ -140,5 +143,10 @@ nav ul.open {display: block;}
 
 input {
   margin: 3px;
+}
+
+#hero-header ul li {
+  display: inline-block;
+  margin: 10px;
 }
 /* end hero page */

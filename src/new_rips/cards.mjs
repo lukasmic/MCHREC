@@ -33,6 +33,11 @@ export async function updateCardData(pool, pack) {
       
         // console.log(aspect_id);
 
+        //I found a site that has them all, who knows if they'll update before or after I need them
+        if (imagesrc == null) {
+          imagesrc = `https://cerebrodatastorage.blob.core.windows.net/cerebro-cards/official/${code}.jpg`
+        }
+
         if(!duplicate_of_code) {
           console.log(`${code} is unique`);
                   // insert the card into the master_cards table

@@ -27,16 +27,22 @@ export function disableRadios(radioList, bool) {
 }
 
 
-export async function getAspectName(aspect) {
-  const response = await fetch(`/api/aspect-name?aspect=${aspect}`);
-  const results = await response.json();
-  return results ? results.aspect_name : null;
-}
-
-
 export function findHeroByCode(heroNamesData, code) {
   const heroObj = heroNamesData.find(card => card.code === code);
   return heroObj ? heroObj.heroname : null;
+}
+
+
+export function findHeroInfoByCode(heroNamesData, code) {
+  const heroObj = heroNamesData.find(card => card.code === code);
+  if (heroObj) {
+    return {
+      heroName: heroObj.heroname,
+      heroPhoto: heroObj.herophoto,
+      alterPhoto: heroObj.alterphoto
+    };
+  }
+  return null;
 }
 
 
@@ -55,6 +61,13 @@ export function findPhotoByCode(cardsData, code) {
 export function findURLByCode(cardsData, code) {
   const cardObj = cardsData.find(card => card.code === code);
   return cardObj ? cardObj.url : null;
+}
+
+
+export async function getAspectName(aspect) {
+  const response = await fetch(`/api/aspect-name?aspect=${aspect}`);
+  const results = await response.json();
+  return results ? results.aspect_name : null;
 }
 
 

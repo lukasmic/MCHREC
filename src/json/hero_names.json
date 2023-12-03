@@ -1,200 +1,345 @@
-[{"code":"21031a",
-"heroname":"Adam Warlock",
-"alter_ego": "Adam Warlock"},
-{"code":"42001a",
-"heroname":"Angel",
-"alter_ego": "Warren Worthington III"},
-{"code":"12001a",
-"heroname":"Ant-Man",
-"alter_ego": "Scott Lang"},
-{"code":"01040a",
-"heroname":"Black Panther",
-"alter_ego": "T'Challa"},
-{"code":"08001a",
-"heroname":"Black Widow",
-"alter_ego": "Natasha Romanoff"},
-{"code":"40001a",
-"heroname":"Cable",
-"alter_ego": "Nathan Summers"},
-{"code":"03001a",
-"heroname":"Captain America",
-"alter_ego": "Steve Rogers"},
-{"code":"01010a",
-"heroname":"Captain Marvel",
-"alter_ego": "Carol Danvers"},
-{"code":"32001a",
-"heroname":"Colossus",
-"alter_ego": "Piotr Rasputin"},
-{"code":"33001a",
-"heroname":"Cyclops",
-"alter_ego": "Scott Summers"},
-{"code":"44001a",
-"heroname":"Deadpool",
-"alter_ego": "Wade Wilson"},
-{"code":"09001a",
-"heroname":"Doctor Strange",
-"alter_ego": "Stephen Strange"},
-{"code":"40037a",
-"heroname":"Domino",
-"alter_ego": "Neena Thurman"},
-{"code":"19001a",
-"heroname":"Drax",
-"alter_ego": "Drax"},
-{"code":"37001a",
-"heroname":"Gambit",
-"alter_ego": "Remy Lebeau"},
-{"code":"18001a",
-"heroname":"Gamora",
-"alter_ego": "Gamora"},
-{"code":"27001a",
-"heroname":"Ghost-Spider",
-"alter_ego": "Gwen Stacy"},
-{"code":"16001a",
-"heroname":"Groot",
-"alter_ego": "Groot"},
-{"code":"04001a",
-"heroname":"Hawkeye",
-"alter_ego": "Clint Barton"},
-{"code":"10001a",
-"heroname":"Hulk",
-"alter_ego": "Bruce Banner"},
-{"code":"01029a",
-"heroname":"Iron Man",
-"alter_ego": "Tony Stark"},
-{"code":"29001a",
-"heroname":"Ironheart",
-"alter_ego": "Riri Williams"},
-{
-  "code": "05001a",
-  "heroname": "Ms. Marvel",
-  "alter_ego": "Kamala Khan"
-},
-{
-  "code": "22001a",
-  "heroname": "Nebula",
-  "alter_ego": "Nebula"
-},
-{
-  "code": "28001a",
-  "heroname": "Nova",
-  "alter_ego": "Sam Alexander"
-},
-{
-  "code": "34001a",
-  "heroname": "Phoenix",
-  "alter_ego": "Jean Grey"
-},
-{"code":"41001a",
-"heroname":"Psylocke",
-"alter_ego": "Betsy Braddock"},
-{
-  "code": "14001a",
-  "heroname": "Quicksilver",
-  "alter_ego": "Pietro Maximoff"
-},
-{
-  "code": "16029a",
-  "heroname": "Rocket Raccoon",
-  "alter_ego": "Rocket Raccoon"
-},
-{
-  "code": "38001a",
-  "heroname": "Rogue",
-  "alter_ego": "Anna Marie"
-},
-{
-  "code": "15001a",
-  "heroname": "Scarlet Witch",
-  "alter_ego": "Wanda Maximoff"
-},
-{
-  "code": "32030a",
-  "heroname": "Shadowcat",
-  "alter_ego": "Kitty Pride"
-},
-{
-  "code": "01019a",
-  "heroname": "She-Hulk",
-  "alter_ego": "Jennifer Walters"
-},
-{
-  "code": "31001a",
-  "heroname": "SP//dr Suit",
-  "alter_ego": "Peni Parker"
-},
-{
-  "code": "21001a",
-  "heroname": "Spectrum",
-  "alter_ego": "Monica Rambeau"
-},
-{
-  "code": "30001a",
-  "heroname": "Spider-Ham",
-  "alter_ego": "Peter Porker"
-},
-{
-  "code": "27030a",
-  "heroname": "Spider-Man (Miles Morales)",
-  "alter_ego": "Miles Morales"
-},
-{
-  "code": "01001a",
-  "heroname": "Spider-Man (Peter Parker)",
-  "alter_ego": "Peter Parker"
-},
-{
-  "code": "04031a",
-  "heroname": "Spider-Woman",
-  "alter_ego": "Jessica Drew"
-},
-{
-  "code": "17001a",
-  "heroname": "Star-Lord",
-  "alter_ego": "Peter Quill"
-},
-{
-  "code": "36001a",
-  "heroname": "Storm",
-  "alter_ego": "Ororo Munroe"
-},
-{
-  "code": "06001a",
-  "heroname": "Thor",
-  "alter_ego": "Odinson"
-},
-{
-  "code": "25001a",
-  "heroname": "Valkyrie",
-  "alter_ego": "Brunnhilde"
-},
-{
-  "code": "20001a",
-  "heroname": "Venom",
-  "alter_ego": "Flash Thompson"
-},
-{
-  "code": "26001a",
-  "heroname": "Vision",
-  "alter_ego": "Vision"
-},
-{
-  "code": "23001a",
-  "heroname": "War Machine",
-  "alter_ego": "James Rhodes"
-},
-{
-  "code": "13001a",
-  "heroname": "Wasp",
-  "alter_ego": "Nadia van Dyne"
-},
-{
-  "code": "35001a",
-  "heroname": "Wolverine",
-  "alter_ego": "Logan"
-},
-{
-  "code": "43001a",
-  "heroname": "X-23",
-  "alter_ego": "Laura Kinney"
-}
+[
+  {
+    "code": "21031a",
+    "heroname": "Adam Warlock",
+    "alter_ego": "Adam Warlock",
+    "herophoto": "https://marvelcdb.com/bundles/cards/21031a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/21031b.png"
+  },
+  {
+    "code": "42001a",
+    "heroname": "Angel",
+    "alter_ego": "Warren Worthington III",
+    "herophoto": "https://marvelcdb.com/bundles/cards/42001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/42001b.png"
+  },
+  {
+    "code": "12001a",
+    "heroname": "Ant-Man",
+    "alter_ego": "Scott Lang",
+    "herophoto": "https://marvelcdb.com/bundles/cards/12001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/12001b.png"
+  },
+  {
+    "code": "01040a",
+    "heroname": "Black Panther",
+    "alter_ego": "T'Challa",
+    "herophoto": "https://marvelcdb.com/bundles/cards/01040a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/01040b.png"
+  },
+  {
+    "code": "08001a",
+    "heroname": "Black Widow",
+    "alter_ego": "Natasha Romanoff",
+    "herophoto": "https://marvelcdb.com/bundles/cards/08001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/08001b.png"
+  },
+  {
+    "code": "40001a",
+    "heroname": "Cable",
+    "alter_ego": "Nathan Summers",
+    "herophoto": "https://marvelcdb.com/bundles/cards/40001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/40001b.png"
+  },
+  {
+    "code": "03001a",
+    "heroname": "Captain America",
+    "alter_ego": "Steve Rogers",
+    "herophoto": "https://marvelcdb.com/bundles/cards/03001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/03001b.png"
+  },
+  {
+    "code": "01010a",
+    "heroname": "Captain Marvel",
+    "alter_ego": "Carol Danvers",
+    "herophoto": "https://marvelcdb.com/bundles/cards/01010a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/01010b.png"
+  },
+  {
+    "code": "32001a",
+    "heroname": "Colossus",
+    "alter_ego": "Piotr Rasputin",
+    "herophoto": "https://marvelcdb.com/bundles/cards/32001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/32001b.png"
+  },
+  {
+    "code": "33001a",
+    "heroname": "Cyclops",
+    "alter_ego": "Scott Summers",
+    "herophoto": "https://marvelcdb.com/bundles/cards/33001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/33001b.png"
+  },
+  {
+    "code": "44001a",
+    "heroname": "Deadpool",
+    "alter_ego": "Wade Wilson",
+    "herophoto": "https://marvelcdb.com/bundles/cards/44001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/44001b.png"
+  },
+  {
+    "code": "09001a",
+    "heroname": "Doctor Strange",
+    "alter_ego": "Stephen Strange",
+    "herophoto": "https://marvelcdb.com/bundles/cards/09001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/09001b.png"
+  },
+  {
+    "code": "40037a",
+    "heroname": "Domino",
+    "alter_ego": "Neena Thurman",
+    "herophoto": "https://marvelcdb.com/bundles/cards/40037a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/40037b.png"
+  },
+  {
+    "code": "19001a",
+    "heroname": "Drax",
+    "alter_ego": "Drax",
+    "herophoto": "https://marvelcdb.com/bundles/cards/19001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/19001b.png"
+  },
+  {
+    "code": "37001a",
+    "heroname": "Gambit",
+    "alter_ego": "Remy Lebeau",
+    "herophoto": "https://marvelcdb.com/bundles/cards/37001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/37001b.png"
+  },
+  {
+    "code": "18001a",
+    "heroname": "Gamora",
+    "alter_ego": "Gamora",
+    "herophoto": "https://marvelcdb.com/bundles/cards/18001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/18001b.png"
+  },
+  {
+    "code": "27001a",
+    "heroname": "Ghost-Spider",
+    "alter_ego": "Gwen Stacy",
+    "herophoto": "https://marvelcdb.com/bundles/cards/27001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/27001b.png"
+  },
+  {
+    "code": "16001a",
+    "heroname": "Groot",
+    "alter_ego": "Groot",
+    "herophoto": "https://marvelcdb.com/bundles/cards/16001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/16001b.png"
+  },
+  {
+    "code": "04001a",
+    "heroname": "Hawkeye",
+    "alter_ego": "Clint Barton",
+    "herophoto": "https://marvelcdb.com/bundles/cards/04001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/04001b.png"
+  },
+  {
+    "code": "10001a",
+    "heroname": "Hulk",
+    "alter_ego": "Bruce Banner",
+    "herophoto": "https://marvelcdb.com/bundles/cards/10001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/10001b.png"
+  },
+  {
+    "code": "01029a",
+    "heroname": "Iron Man",
+    "alter_ego": "Tony Stark",
+    "herophoto": "https://marvelcdb.com/bundles/cards/01029a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/01029b.png"
+  },
+  {
+    "code": "29001a",
+    "heroname": "Ironheart",
+    "alter_ego": "Riri Williams",
+    "herophoto": "https://marvelcdb.com/bundles/cards/29001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/29001b.png"
+  },
+  {
+    "code": "05001a",
+    "heroname": "Ms. Marvel",
+    "alter_ego": "Kamala Khan",
+    "herophoto": "https://marvelcdb.com/bundles/cards/05001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/05001b.png"
+  },
+  {
+    "code": "22001a",
+    "heroname": "Nebula",
+    "alter_ego": "Nebula",
+    "herophoto": "https://marvelcdb.com/bundles/cards/22001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/22001b.png"
+  },
+  {
+    "code": "28001a",
+    "heroname": "Nova",
+    "alter_ego": "Sam Alexander",
+    "herophoto": "https://marvelcdb.com/bundles/cards/28001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/28001b.png"
+  },
+  {
+    "code": "34001a",
+    "heroname": "Phoenix",
+    "alter_ego": "Jean Grey",
+    "herophoto": "https://marvelcdb.com/bundles/cards/34001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/34001b.png"
+  },
+  {
+    "code": "41001a",
+    "heroname": "Psylocke",
+    "alter_ego": "Betsy Braddock",
+    "herophoto": "https://marvelcdb.com/bundles/cards/41001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/41001b.png"
+  },
+  {
+    "code": "14001a",
+    "heroname": "Quicksilver",
+    "alter_ego": "Pietro Maximoff",
+    "herophoto": "https://marvelcdb.com/bundles/cards/14001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/14001b.png"
+  },
+  {
+    "code": "16029a",
+    "heroname": "Rocket Raccoon",
+    "alter_ego": "Rocket Raccoon",
+    "herophoto": "https://marvelcdb.com/bundles/cards/16029a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/16029b.png"
+  },
+  {
+    "code": "38001a",
+    "heroname": "Rogue",
+    "alter_ego": "Anna Marie",
+    "herophoto": "https://marvelcdb.com/bundles/cards/38001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/38001b.png"
+  },
+  {
+    "code": "15001a",
+    "heroname": "Scarlet Witch",
+    "alter_ego": "Wanda Maximoff",
+    "herophoto": "https://marvelcdb.com/bundles/cards/15001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/15001b.png"
+  },
+  {
+    "code": "32030a",
+    "heroname": "Shadowcat",
+    "alter_ego": "Kitty Pride",
+    "herophoto": "https://marvelcdb.com/bundles/cards/32030a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/32030b.png"
+  },
+  {
+    "code": "01019a",
+    "heroname": "She-Hulk",
+    "alter_ego": "Jennifer Walters",
+    "herophoto": "https://marvelcdb.com/bundles/cards/01019a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/01019b.png"
+  },
+  {
+    "code": "31001a",
+    "heroname": "SP//dr Suit",
+    "alter_ego": "Peni Parker",
+    "herophoto": "https://marvelcdb.com/bundles/cards/31001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/31001b.png"
+  },
+  {
+    "code": "21001a",
+    "heroname": "Spectrum",
+    "alter_ego": "Monica Rambeau",
+    "herophoto": "https://marvelcdb.com/bundles/cards/21001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/21001b.png"
+  },
+  {
+    "code": "30001a",
+    "heroname": "Spider-Ham",
+    "alter_ego": "Peter Porker",
+    "herophoto": "https://marvelcdb.com/bundles/cards/30001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/30001b.png"
+  },
+  {
+    "code": "27030a",
+    "heroname": "Spider-Man (Miles Morales)",
+    "alter_ego": "Miles Morales",
+    "herophoto": "https://marvelcdb.com/bundles/cards/27030a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/27030b.png"
+  },
+  {
+    "code": "01001a",
+    "heroname": "Spider-Man (Peter Parker)",
+    "alter_ego": "Peter Parker",
+    "herophoto": "https://marvelcdb.com/bundles/cards/01001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/01001b.png"
+  },
+  {
+    "code": "04031a",
+    "heroname": "Spider-Woman",
+    "alter_ego": "Jessica Drew",
+    "herophoto": "https://marvelcdb.com/bundles/cards/04031a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/04031b.png"
+  },
+  {
+    "code": "17001a",
+    "heroname": "Star-Lord",
+    "alter_ego": "Peter Quill",
+    "herophoto": "https://marvelcdb.com/bundles/cards/17001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/17001b.png"
+  },
+  {
+    "code": "36001a",
+    "heroname": "Storm",
+    "alter_ego": "Ororo Munroe",
+    "herophoto": "https://marvelcdb.com/bundles/cards/36001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/36001b.png"
+  },
+  {
+    "code": "06001a",
+    "heroname": "Thor",
+    "alter_ego": "Odinson",
+    "herophoto": "https://marvelcdb.com/bundles/cards/06001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/06001b.png"
+  },
+  {
+    "code": "25001a",
+    "heroname": "Valkyrie",
+    "alter_ego": "Brunnhilde",
+    "herophoto": "https://marvelcdb.com/bundles/cards/25001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/25001b.png"
+  },
+  {
+    "code": "20001a",
+    "heroname": "Venom",
+    "alter_ego": "Flash Thompson",
+    "herophoto": "https://marvelcdb.com/bundles/cards/20001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/20001b.png"
+  },
+  {
+    "code": "26001a",
+    "heroname": "Vision",
+    "alter_ego": "Vision",
+    "herophoto": "https://marvelcdb.com/bundles/cards/26001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/26001b.png"
+  },
+  {
+    "code": "23001a",
+    "heroname": "War Machine",
+    "alter_ego": "James Rhodes",
+    "herophoto": "https://marvelcdb.com/bundles/cards/23001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/23001b.png"
+  },
+  {
+    "code": "13001a",
+    "heroname": "Wasp",
+    "alter_ego": "Nadia van Dyne",
+    "herophoto": "https://marvelcdb.com/bundles/cards/13001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/13001b.png"
+  },
+  {
+    "code": "35001a",
+    "heroname": "Wolverine",
+    "alter_ego": "Logan",
+    "herophoto": "https://marvelcdb.com/bundles/cards/35001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/35001b.png"
+  },
+  {
+    "code": "43001a",
+    "heroname": "X-23",
+    "alter_ego": "Laura Kinney",
+    "herophoto": "https://marvelcdb.com/bundles/cards/43001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/43001b.png"
+  }
 ]

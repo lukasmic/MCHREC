@@ -39,7 +39,7 @@ export function findHeroInfoByCode(heroNamesData, code) {
     return {
       heroName: heroObj.heroname,
       heroPhoto: heroObj.herophoto,
-      alterPhoto: heroObj.alterphoto
+      alterPhoto: heroObj.alterphoto,
     };
   }
   return null;

@@ -1,31 +1,36 @@
 import { capitalize, getSelectedRadioButtonText } from "./utils.js";
 
 export async function createHeroSelector(heroCardsData) {
-  const response = await fetch(`/api/get-packs`);
-  const results = await response.json();
-  // console.log(results);
-
   const selectorSection = document.querySelector("#hero-select");
   
   const selectorDiv = document.createElement("div");
   selectorDiv.setAttribute("id", "hero");
+  selectorDiv.setAttribute("class", "center");
+  selectorSection.appendChild(selectorDiv);
 
-  //Make a selector for all the heroes, id is their hero code, visible is their hero name
-  selectorDiv.innerHTML = `<label for="hero-selector">Choose your hero: </label>`;
-  const heroSelect = document.createElement("select");
-  heroSelect.setAttribute("name", "hero-selector");
-  heroSelect.setAttribute("id", "hero-selector");
-  heroSelect.innerHTML = `<option value="none" selected disabled hidden>Choose your hero</option>`;
+  // //Make a selector for all the heroes, id is their hero code, visible is their hero name
+  // selectorDiv.innerHTML = `<label for="hero-selector">Choose your hero: </label>`;
+  // const heroSelect = document.createElement("select");
+  // heroSelect.setAttribute("name", "hero-selector");
+  // heroSelect.setAttribute("id", "hero-selector");
+  // heroSelect.innerHTML = `<option value="none" selected disabled hidden>Choose your hero</option>`;
+
+  // for (const hero of heroCardsData) {
+  //   //heroname, code
+  //   const option = document.createElement("option");
+  //   option.setAttribute("value", hero.code);
+  //   option.textContent = hero.heroname;
+  //   heroSelect.appendChild(option);
+  // }
+  // selectorDiv.appendChild(heroSelect);
+  // selectorSection.appendChild(selectorDiv);
 
   for (const hero of heroCardsData) {
-    //heroname, code
-    const option = document.createElement("option");
-    option.setAttribute("value", hero.code);
-    option.textContent = hero.heroname;
-    heroSelect.appendChild(option);
+    const heroDiv = createHeroRadio(hero.code, hero.heroname)
+    selectorDiv.appendChild(heroDiv);
   }
-  selectorDiv.appendChild(heroSelect);
-  selectorSection.appendChild(selectorDiv);
+
+
 
   //Make a radio button for each aspect
   //We're gonna make this an exportable function in anticipation for Spider-Woman shenanigans
@@ -49,6 +54,8 @@ export async function createHeroSelector(heroCardsData) {
   const packsSection = document.createElement("section");
   packsSection.setAttribute("id", "packs-section");
   selectorSection.appendChild(packsSection);
+  const response = await fetch(`/api/get-packs`);
+  const results = await response.json();
   const packsCheckboxesDiv = createPackCheckboxes(results);
   packsSection.appendChild(packsCheckboxesDiv);
 
@@ -113,6 +120,33 @@ export function createRadios(radioName, basic = false) {
 }
 
 
+export function createHeroRadio(code, heroname) {
+  const div = document.createElement("div");
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  const img = document.createElement("img");
+
+  input.setAttribute("type", "radio");
+  input.setAttribute("name", "hero");
+  input.setAttribute("id", heroname);
+  input.setAttribute("value", code);
+
+  img.setAttribute("src", `/images/${code}.webp`);
+  img.setAttribute("alt", `selector image for ${heroname}`);
+
+
+  label.setAttribute("for", heroname);
+  label.innerHTML = `${heroname}<br>`;
+  label.appendChild(img);
+
+  div.appendChild(input);
+  div.appendChild(label);
+
+  return div;
+}
+
+
+// export since we'll feed this to staples page
 export function createHistoryRadio(option) {
   const label = document.createElement("label");
   const input = document.createElement("input");
@@ -158,7 +192,7 @@ function createPackCheckboxes(packsData) {
   packsDiv.appendChild(checkAllButton);
   packsDiv.appendChild(uncheckAllButton);
 
-  return packsDiv;
+  return packsDiv; 
 }
 
 

@@ -11,7 +11,7 @@ loadHeaderFooter().then(header => {
 await createHeroSelector(heroNamesData);
 
 //Add event listeners for the hero and aspect selectors
-const heroSelector = document.getElementById("hero-selector");
+const heroRadio = document.getElementsByName("hero");
 const radio1 = document.getElementsByName("aspect");
 const submitButton = document.getElementById("submitBtn");
 const radio2Div = document.getElementById("aspect2");
@@ -22,7 +22,11 @@ const checkAllButton = document.getElementById("check-all");
 const uncheckAllButton = document.getElementById("uncheck-all");
 
 // Add event listeners to selector and radio buttons
-heroSelector.addEventListener("change", handleSelectionChange);
+// heroSelector.addEventListener("change", handleSelectionChange);
+for (let i = 0; i < heroRadio.length; i++) {
+  heroRadio[i].addEventListener("change", handleSelectionChange);
+}
+
 for (let i = 0; i < radio1.length; i++) {
   radio1[i].addEventListener("change", handleSelectionChange);
 }
@@ -37,13 +41,13 @@ uncheckAllButton.addEventListener("click", uncheckAllPacks);
 // Function to handle selection changes
 function handleSelectionChange() {
   
-  if (heroSelector.value == "21031a") { // Adam Warlock
+  if (getSelectedRadioButtonValue(heroRadio) == "21031a") { // Adam Warlock
     //disable aspect buttons and enable Get Results
     disableRadios(radio1, true);
     disableRadios(radio2, true);
     radio2Div.style.display = "none";
     submitButton.disabled = false;
-  } else if (heroSelector.value == "04031a") { //Spider-Woman
+  } else if (getSelectedRadioButtonValue(heroRadio) == "04031a") { //Spider-Woman
     //make sure Adam isn't screwing up radios
     disableRadios(radio1, false);
     disableRadios(radio2, false);
@@ -56,7 +60,7 @@ function handleSelectionChange() {
       submitButton.disabled = true;
     }
 
-  } else if (heroSelector.value && getSelectedRadioButtonValue(radio1) && (heroSelector.value !== "none")) {
+  } else if (getSelectedRadioButtonValue(heroRadio) && getSelectedRadioButtonValue(radio1) && (getSelectedRadioButtonValue(heroRadio) !== "none")) {
     //ordinary hero, proceed
     disableRadios(radio1, false);
     disableRadios(radio2, false);
@@ -76,13 +80,14 @@ function handleSelectionChange() {
 
 async function handleSubmit(event) {
   event.preventDefault(); // Prevent page refresh
-  const herocode = heroSelector.value;
+  const herocode = getSelectedRadioButtonValue(heroRadio);
+  // console.log(herocode);
   const heroAspect = getSelectedRadioButtonValue(radio1);
   const percentageType = getSelectedRadioButtonValue(document.getElementsByName("percentage-selector"));
   const historyOption = getSelectedRadioButtonValue(document.getElementsByName("history-selector"));
   const packList = getSelectedPackIds(packs);
 
-  if (herocode == "21031a") { //Adam Warlock
+  if (herocode == "21031a") { //Adam Warlock 
     // await processAdamWarlockDecks(percentageType);
     await processHeroDecks("21031a", 0, heroNamesData, percentageType, historyOption, packList);
   } else if (herocode == "04031a") { //Spider-Woman

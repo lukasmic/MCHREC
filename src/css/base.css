@@ -149,4 +149,74 @@ input {
   display: inline-block;
   margin: 10px;
 }
+
+/* .hero {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.hero img {
+  display: block;
+  margin: auto;
+  width: 237px;
+} */
+
+
+#hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-items: center;
+  cursor: pointer;
+  /* max-width: 90%; */
+  margin: auto;
+}
+
+#hero input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+#hero label {
+  display: block;
+  text-align: center;
+  margin: 4px; /* Adjust as needed */
+  cursor: pointer;
+}
+
+#hero img {
+  width: 100%; /* Adjust as needed */
+  max-width: 180px; /* Adjust to suit your design */
+  margin-top: 8px; /* Adjust as needed */
+}
+
+#hero div {
+  border: 2px solid #CCCCCC; /* default border color */
+  border-radius: 25px;
+  padding: 8px;
+  /* margin-bottom: 16px; space between each hero option */
+}
+
+#hero input[type="radio"]:checked + label {
+  border: 3px solid #00FF00; /* border color when selected */
+  border-radius: 25px;
+}
+
+#hero-select {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  /* max-width: 90%; */
+}
+
+main {
+  max-width: 90%;
+  justify-content: center;
+  margin: auto;
+}
+
+
 /* end hero page */

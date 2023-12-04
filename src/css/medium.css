@@ -19,6 +19,10 @@
     flex-wrap: wrap;
   }
 
+  main {
+    max-width: 90%;
+  }
+
   #card-results ul li, #staple-results ul li {
     max-width: 99%;
   }
@@ -27,4 +31,6 @@
     max-width: 80%;
     margin: auto;
   }
+
+
 }

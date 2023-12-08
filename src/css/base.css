@@ -211,13 +211,14 @@ input {
 #hero div {
   border: 2px solid #CCCCCC; /* default border color */
   border-radius: 25px;
-  padding: 4px;
+  padding: 2px;
   /* margin-bottom: 16px; space between each hero option */
 }
 
 #hero input[type="radio"]:checked + label {
-  border: 3px solid #00FF00; /* border color when selected */
-  border-radius: 25px;
+  border: 5px solid #00FF00; /* border color when selected */
+  padding: 1px;
+  border-radius: 15px;
 }
 
 #hero-select {

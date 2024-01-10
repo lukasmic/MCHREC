@@ -60,10 +60,11 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
     procedureCall = 'CALL CalculateSpiderWomanSynergy(?, ?, ?, ?)';
     queryParameters = [heroAspect, synPerc, history, packs];
   } else {
-    procedureCall = 'CALL CalculateSynergy(?, ?, ?, ?, ?)';
+    procedureCall = 'CALL CalculateSynergyNew(?, ?, ?, ?, ?)';
     queryParameters = [herocode, heroAspect, synPerc, history, packs];
   }
   try { 
+    // console.log(queryParameters);
     const result = await queryWithRetry(pool, procedureCall, queryParameters);
     const [rows, fields] = result;  // Then, if the result is as expected, you can destructure it
     res.json(rows[0]);

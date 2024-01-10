@@ -102,6 +102,11 @@ nav ul.open {display: block;}
 
 
 /* hero page */
+
+#aspect, #aspect2, #history-selector, #percentage-selector, #submitBtn {
+  font-weight: bold;
+}
+
 #aspect2, #packs {
   display: none;
 }

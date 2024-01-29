@@ -38,6 +38,9 @@ showPacksBtn.addEventListener("click", showPacks);
 checkAllButton.addEventListener("click", checkAllPacks);
 uncheckAllButton.addEventListener("click", uncheckAllPacks);
 
+incrementVisitCount();
+
+
 // Function to handle selection changes
 function handleSelectionChange() {
   
@@ -97,5 +100,18 @@ async function handleSubmit(event) {
     await processHeroDecks("04031a", swAspect, heroNamesData, percentageType, historyOption, packList);
   } else {
     await processHeroDecks(herocode, heroAspect, heroNamesData, percentageType, historyOption, packList);
+  }
+}
+
+
+async function incrementVisitCount() {
+  try {
+    const response = await fetch('/increment-visit-count', { method: 'POST' });
+    if (!response.ok) {
+      throw new Error('Visit count increment failed');
+    }
+    // console.log('Visit count incremented successfully');
+  } catch (error) {
+    console.error('Error incrementing visit count:', error);
   }
 }

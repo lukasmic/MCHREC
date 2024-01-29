@@ -1,8 +1,7 @@
 //server.js
-//this motherfucker MUST be at the top, especially above anything that requires database access
+//this guy MUST be at the top, especially above anything that requires database access
 import dotenv from 'dotenv'; 
 dotenv.config();
-
 import express from "express";
 
 //use these constantly
@@ -15,7 +14,6 @@ import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 // import { updateHeroData } from "./src/new_rips/heroes.mjs";
 // import { updateTraits } from "./src/new_rips/traits.mjs";
 // import { updateVillainSets } from "./src/new_rips/villains.mjs";
-
 
 const app = express();
 app.use(express.static("src"));
@@ -44,6 +42,33 @@ const asyncHandler = fn => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
 
+app.post('/increment-visit-count', asyncHandler(async (req, res, next) => {
+  await queryWithRetry(pool, 'UPDATE visit_count SET count = count + 1 WHERE id = 1');
+  res.status(200).send('Visit count incremented');
+}));
+
+
+app.get('/visit-count', asyncHandler(async (req, res) => {
+  // console.log("Visit count endpoint hit");
+  try {
+    // Destructuring to get the rows array
+    const [rows] = await queryWithRetry(pool, 'SELECT count FROM visit_count WHERE id = 1');
+    // console.log("Query result:", rows);
+
+    if (rows.length > 0) {
+      // console.log("Visit count:", rows[0].count);
+      res.json({ visitCount: rows[0].count });
+    } else {
+      // console.log("No rows found in visit_count table");
+      res.status(404).send('No visit count data found');
+    }
+  } catch (error) {
+    console.error('Error fetching visit count:', error);
+    res.status(500).send('Error fetching visit count');
+  }
+}));
+
+
 app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
   const { herocode, heroAspect, percentageType, history, packs } = req.query;
   const isSynergy = percentageType == "synergy";
@@ -60,7 +85,7 @@ app.get('/api/calculate-synergy', asyncHandler(async (req, res) => {
     procedureCall = 'CALL CalculateSpiderWomanSynergy(?, ?, ?, ?)';
     queryParameters = [heroAspect, synPerc, history, packs];
   } else {
-    procedureCall = 'CALL CalculateSynergyNew(?, ?, ?, ?, ?)';
+    procedureCall = 'CALL CalculateSynergy(?, ?, ?, ?, ?)';
     queryParameters = [herocode, heroAspect, synPerc, history, packs];
   }
   try { 

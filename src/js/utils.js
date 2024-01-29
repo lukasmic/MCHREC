@@ -111,6 +111,20 @@ export function getSelectedRadioButtonValue(radioSet) {
 }
 
 
+export async function getVisitCount() {
+  try {
+    const response = await fetch('/visit-count');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.visitCount;
+  } catch (error) {
+    console.error('Error fetching visit count:', error);
+  }
+}
+
+
 export function hamburger(header) {
   const x = header.querySelector("#hamburgerBtn");
   x.onclick = toggleMenu;
@@ -126,6 +140,7 @@ export async function loadHeaderFooter() {
   const footerTemplate = await loadTemplate("../snippets/footer.html");
   renderWithTemplate(footerTemplate, footer);
 
+  document.getElementById("visit-count").textContent = await getVisitCount();
   return header;
 }
 

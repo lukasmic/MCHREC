@@ -75,7 +75,7 @@ def upload_to_drive(backup_filename):
         print("Upload failed, not deleting file.")
 
 
-def safe_delete_file(filename, max_attempts=5, wait_seconds=6):
+def safe_delete_file(filename, max_attempts=2, wait_seconds=1):
     """Attempt to delete a file with retries."""
     for attempt in range(max_attempts):
         try:

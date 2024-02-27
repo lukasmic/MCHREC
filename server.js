@@ -160,7 +160,7 @@ app.listen(3000, function() {
 // Function to call the Python backup script
 function performBackup() {
   console.log("Attempting backup");
-  exec('python python/backup.py', (error, stdout, stderr) => {
+  exec('python src/python/backup.py', (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return;

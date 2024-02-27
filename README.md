@@ -14,13 +14,15 @@ Some players even dismiss earnestly good heroes that they otherwise might have e
 
 ### How does it work?
 
-The main focus of the website is going to be the "hero guide" page. All you have to do is choose your hero from the drop-down menu, then select your aspect (Adam Warlock doesn't have to choose an aspect; Spider-Women must select two).
-Once you hit submit, MCHREC goes through all our deck data and finds every card used in each of those decks, then for each individual card, we calculate its "synergy score" - (the popularity of that card for that hero/aspect) minus (the popularity of that card for other decks of that aspect).
+The main focus of the website is going to be the "hero guide" page. All you have to do is choose your hero, then select your aspect (Adam Warlock doesn't have to choose an aspect; Spider-Women must select two).
+Once you hit submit, MCHREC goes through all our deck data and finds every card used in each of those decks, then for each individual card, we calculate its "synergy score" - (the popularity of that card for your chosen hero/aspect) minus (the popularity of that card for other decks of that aspect).
 
-On the "staples" page, you can also choose an aspect to find the most popularly used cards for that aspect overall
+On the "staples" page, you can also choose an aspect to find the most popularly used cards for that aspect overall.
 
 
-### To-Do / Wishlist
+## To-Do / Wishlist
+
+#### Clickable modals of generated cards to read text and see the list of packs that card comes from
 
 #### Reverse Synergy Card Lookup
 

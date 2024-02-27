@@ -156,16 +156,16 @@ app.listen(3000, function() {
   console.log("Server listening on port 3000");
 });
 
-//comment out the vbackup script when we're testing new releases
-// console.log("attempting backup");
-// exec('python python/backup.py', (error, stdout, stderr) => {
-//   if (error) {
-//     console.error(`exec error: ${error}`);
-//     return;
-//   }
-//   console.log(`stdout: ${stdout}`);
-//   console.error(`stderr: ${stderr}`);
-// });
+//comment out the backup script when we're testing new releases
+console.log("attempting backup");
+exec('python python/backup.py', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.error(`stderr: ${stderr}`);
+});
 
 
 

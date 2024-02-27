@@ -3,7 +3,6 @@ import json
 import os
 import os.path
 import datetime
-import schedule
 import subprocess
 import time
 from google.auth.transport.requests import Request

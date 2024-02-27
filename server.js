@@ -156,16 +156,30 @@ app.listen(3000, function() {
   console.log("Server listening on port 3000");
 });
 
-//comment out the backup script when we're testing new releases
-console.log("attempting backup");
-exec('python python/backup.py', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});
+
+// Function to call the Python backup script
+function performBackup() {
+  console.log("Attempting backup");
+  exec('python python/backup.py', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
+  });
+}
+
+// Start the backup interval
+function startBackupInterval() {
+  performBackup(); // Perform initial backup upon server start
+  const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000 + (10 * 60 * 1000); // Convert one week to milliseconds (add ten minutes so we're not trying it as same time as deck pulls)
+  setInterval(performBackup, oneWeekInMilliseconds); // Schedule subsequent backups
+}
+
+// Call this function when initializing your server
+// Comment out during new releases
+startBackupInterval();
 
 
 

@@ -155,9 +155,13 @@ input {
   margin: 3px;
 }
 
+#hero-header ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 #hero-header ul li {
-  display: inline-block;
-  margin: 10px;
+  margin: 2px;
 }
 
 /* .hero {

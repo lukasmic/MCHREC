@@ -49,8 +49,10 @@ function buildHeroHeader(heroNamesData, herocode, aspectName, totalChosenDecks, 
 
 
   let ul = document.createElement('ul');
+  ul.setAttribute("class", "center");
 
   let liHero = document.createElement('li');
+  liHero.setAttribute("class", "center");
   let imgHero = document.createElement('img');
   imgHero.src = heroPhoto;
   imgHero.alt = `photo of ${heroName} hero`;

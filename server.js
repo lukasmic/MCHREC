@@ -157,15 +157,15 @@ app.listen(3000, function() {
 });
 
 //comment out the vbackup script when we're testing new releases
-console.log("attempting backup");
-exec('python python/backup.py', (error, stdout, stderr) => {
-  if (error) {
-    console.error(`exec error: ${error}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-  console.error(`stderr: ${stderr}`);
-});
+// console.log("attempting backup");
+// exec('python python/backup.py', (error, stdout, stderr) => {
+//   if (error) {
+//     console.error(`exec error: ${error}`);
+//     return;
+//   }
+//   console.log(`stdout: ${stdout}`);
+//   console.error(`stderr: ${stderr}`);
+// });
 
 
 

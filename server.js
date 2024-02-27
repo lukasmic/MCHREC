@@ -3,6 +3,8 @@
 import dotenv from 'dotenv'; 
 dotenv.config();
 import express from "express";
+//testing python backup
+import { exec }  from "child_process";
 
 //use these constantly
 import { createDatabasePool, queryWithRetry } from "./src/js/server-utils.js";
@@ -152,6 +154,17 @@ startRipDeckDataInterval(pool);
 
 app.listen(3000, function() {
   console.log("Server listening on port 3000");
+});
+
+//comment out the vbackup script when we're testing new releases
+console.log("attempting backup");
+exec('python python/backup.py', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`exec error: ${error}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+  console.error(`stderr: ${stderr}`);
 });
 
 

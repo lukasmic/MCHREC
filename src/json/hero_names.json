@@ -21,6 +21,13 @@
     "alterphoto": "https://marvelcdb.com/bundles/cards/12001b.png"
   },
   {
+    "code": "45001a",
+    "heroname": "Bishop",
+    "alter_ego": "Lucas Bishop",
+    "herophoto": "https://marvelcdb.com/bundles/cards/45001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/45001b.png"
+  },
+  {
     "code": "01040a",
     "heroname": "Black Panther",
     "alter_ego": "T'Challa",
@@ -152,6 +159,13 @@
     "alter_ego": "Riri Williams",
     "herophoto": "https://marvelcdb.com/bundles/cards/29001a.png",
     "alterphoto": "https://marvelcdb.com/bundles/cards/29001b.png"
+  },
+  {
+    "code": "45030a",
+    "heroname": "Magik",
+    "alter_ego": "Illyana Rasputin",
+    "herophoto": "https://marvelcdb.com/bundles/cards/45030a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/45030b.png"
   },
   {
     "code": "05001a",

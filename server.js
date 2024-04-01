@@ -11,9 +11,9 @@ import { createDatabasePool, queryWithRetry } from "./src/js/server-utils.js";
 import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 
 //only use these as new releases come out
-// import { updatePackData } from "./src/new_rips/packs.mjs";
-// import { updateCardData } from "./src/new_rips/cards.mjs";
-// import { updateHeroData } from "./src/new_rips/heroes.mjs";
+import { updatePackData } from "./src/new_rips/packs.mjs";
+import { updateCardData } from "./src/new_rips/cards.mjs";
+import { updateHeroData } from "./src/new_rips/heroes.mjs";
 // import { updateTraits } from "./src/new_rips/traits.mjs";
 // import { updateVillainSets } from "./src/new_rips/villains.mjs";
 
@@ -152,45 +152,52 @@ app.get('/api/staples', asyncHandler(async (req, res) => {
 // I begin with a call of ripDeckData() before setting the timer
 startRipDeckDataInterval(pool); 
 
-app.listen(3000, function() {
+app.listen(3001, function() {
   console.log("Server listening on port 3000");
 });
 
 
 // Function to call the Python backup script
-function performBackup() {
-  console.log("Attempting backup");
-  exec('python src/python/backup.py', (error, stdout, stderr) => {
-    if (error) {
-      console.error(`exec error: ${error}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
-    console.error(`stderr: ${stderr}`);
-  });
-}
+// function performBackup() {
+//   console.log("Attempting backup");
+//   exec('python src/python/backup.py', (error, stdout, stderr) => {
+//     if (error) {
+//       console.error(`exec error: ${error}`);
+//       return;
+//     }
+//     console.log(`stdout: ${stdout}`);
+//     console.error(`stderr: ${stderr}`);
+//   });
+// }
 
 // Start the backup interval
-function startBackupInterval() {
-  performBackup(); // Perform initial backup upon server start
-  const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000 + (10 * 60 * 1000); // Convert one week to milliseconds (add ten minutes so we're not trying it as same time as deck pulls)
-  setInterval(performBackup, oneWeekInMilliseconds); // Schedule subsequent backups
-}
+// function startBackupInterval() {
+//   performBackup(); // Perform initial backup upon server start
+//   const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000 + (10 * 60 * 1000); // Convert one week to milliseconds (add ten minutes so we're not trying it as same time as deck pulls)
+//   setInterval(performBackup, oneWeekInMilliseconds); // Schedule subsequent backups
+// }
 
 // Call this function when initializing your server
 // Comment out during new releases
-startBackupInterval();
+//startBackupInterval();
+
+
+
+
 
 
 
 //here lies the gaggle of junk we need to do as new releases come out
+
+
+// performBackup(); // Backup the database before anything else happens
 
 // updatePackData(pool);
 
 //also will have to manually insert new heroes into hero_names.json (probably the only JSON we're keeping)
 // updateHeroData(pool);
 
-// updateCardData(pool, "deadpool");
+// updateCardData(pool, "aoa");
 
 
 

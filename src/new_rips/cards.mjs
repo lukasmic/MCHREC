@@ -8,7 +8,7 @@ export async function updateCardData(pool, pack) {
   const cards = await response.json();
  
   for (let card of cards) {
-    const { code, pack_code, name, subname = null, type_code, imagesrc = null, text, faction_code, card_set_type_name_code = null, duplicate_of_code = null, url } = card;
+    let { code, pack_code, name, subname = null, type_code, imagesrc = null, text, faction_code, card_set_type_name_code = null, duplicate_of_code = null, url } = card;
     
     // query the aspects table to get the aspect_id
     const sql = `SELECT aspect_id FROM aspects WHERE aspect_name = ?`;
@@ -34,6 +34,7 @@ export async function updateCardData(pool, pack) {
         // console.log(aspect_id);
 
         //I found a site that has them all, who knows if they'll update before or after I need them
+        // Changed start of this for loop to let so imagesrc is mutable
         if (imagesrc == null) {
           imagesrc = `https://cerebrodatastorage.blob.core.windows.net/cerebro-cards/official/${code}.jpg`
         }

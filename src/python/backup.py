@@ -28,6 +28,7 @@ def perform_backup():
     backup_filename = generate_backup_filename()
     backup_command = f"mysqldump -h {db_hostname} -P {db_port} -u {db_user} -p{db_password} {db_name} > {backup_filename}"
     subprocess.run(backup_command, check=True, shell=True)
+    print(f"Returning backup filename: {backup_filename}")
     return backup_filename
 
 

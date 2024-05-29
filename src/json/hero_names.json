@@ -147,6 +147,13 @@
     "alterphoto": "https://marvelcdb.com/bundles/cards/10001b.png"
   },
   {
+    "code": "46001a",
+    "heroname": "Iceman",
+    "alter_ego": "Bobby Drake",
+    "herophoto": "https://marvelcdb.com/bundles/cards/46001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/46001b.png"
+  },
+  {
     "code": "01029a",
     "heroname": "Iron Man",
     "alter_ego": "Tony Stark",

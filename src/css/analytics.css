@@ -1,0 +1,74 @@
+main {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f8ff;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 100vh;
+  /* margin: 0; */
+}
+
+.hidden-page {
+  text-align: center;
+  background-color: #fff0f5;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
+}
+
+.title {
+  font-size: 2.5em;
+  color: #ff69b4;
+  margin-bottom: 10px;
+}
+
+.message {
+  font-size: 1.5em;
+  color: #ff1493;
+  margin-bottom: 20px;
+}
+
+.heart {
+  width: 100px;
+  height: 89px;
+  background-color: #ff69b4;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: heartbeat 1s infinite;
+  margin: auto;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  width: 100px;
+  height: 100px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart::before {
+  top: -50px;
+  left: 0;
+}
+
+.heart::after {
+  left: 50px;
+  top: 0;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+      transform: scale(1) rotate(-45deg);
+  }
+  50% {
+      transform: scale(1.1) rotate(-45deg);
+  }
+}
+
+/* CSS to reveal the hidden page */
+.reveal .hidden-page {
+  display: block;
+}

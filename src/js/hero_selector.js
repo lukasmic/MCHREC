@@ -61,6 +61,7 @@ export async function createHeroSelector(heroCardsData) {
 
   const showPacksBtn = document.createElement("button");
   showPacksBtn.setAttribute("id", "showPacksBtn");
+  showPacksBtn.setAttribute("class", "btn btn-primary");
   showPacksBtn.textContent = "Select Packs (optional)";
   packsSection.appendChild(showPacksBtn);
 

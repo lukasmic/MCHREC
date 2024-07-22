@@ -19,7 +19,7 @@ section, div {
 }
 
 footer {
-  background-color:#eee;
+  /* background-color:#eee; */
   border-top: 1px solid rgba(0,0,0,.5);
 }
 
@@ -42,15 +42,14 @@ ul {
   color: red;
 }
 
-
+/* 
 /* hamburger navigation */
 
-#smallNav {
-  display: flex;
+/* #smallNav #primaryNav {
   justify-content: space-between;
-}
+} */
 
-#hamburgerBtn {
+/* #hamburgerBtn {
   align-items: center;
   height: 90%;
 }
@@ -60,12 +59,10 @@ nav button {
   background: transparent;
   border: none;
   font-size: 2rem;
-  color: #555;
-}
+   color: #555; 
 
-nav {
-  background-color:#eee;
-}
+  */
+
 
 nav ul {
   padding: 0;
@@ -76,7 +73,7 @@ nav ul li a, #mainLink {
   display: block;
   padding: .8rem 2vw;
   text-decoration: none;
-  color: #333;
+  /* color: #333; */
   border-top: 1px solid rgba(0,0,0,.5);
 }
 

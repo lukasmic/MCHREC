@@ -39,6 +39,10 @@ export async function updateCardData(pool, pack) {
           imagesrc = `https://cerebrodatastorage.blob.core.windows.net/cerebro-cards/official/${code}.jpg`
         }
 
+        if (!(imagesrc.includes("https"))) { // the API has started to shortening the URL to the following: /bundles/cards/47011.jpg
+          imagesrc = "https://marvelcdb.com" + imagesrc
+        }; 
+
         if(!duplicate_of_code) {
           console.log(`${code} is unique`);
                   // insert the card into the master_cards table

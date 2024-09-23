@@ -196,6 +196,13 @@
     "alterphoto": "https://marvelcdb.com/bundles/cards/22001b.png"
   },
   {
+    "code": "48001a",
+    "heroname": "Nightcrawler",
+    "alter_ego": "Kurt Wagner",
+    "herophoto": "https://marvelcdb.com/bundles/cards/48001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/48001b.png"
+  },
+  {
     "code": "28001a",
     "heroname": "Nova",
     "alter_ego": "Sam Alexander",

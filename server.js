@@ -11,9 +11,9 @@ import { createDatabasePool, queryWithRetry } from "./src/js/server-utils.js";
 import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 
 //only use these as new releases come out
-// import { updatePackData } from "./src/new_rips/packs.mjs";
-// import { updateCardData } from "./src/new_rips/cards.mjs";
-// import { updateHeroData } from "./src/new_rips/heroes.mjs";
+import { updatePackData } from "./src/new_rips/packs.mjs";
+import { updateCardData } from "./src/new_rips/cards.mjs";
+import { updateHeroData } from "./src/new_rips/heroes.mjs";
 // import { updateTraits } from "./src/new_rips/traits.mjs";
 // import { updateVillainSets } from "./src/new_rips/villains.mjs";
 
@@ -198,7 +198,7 @@ app.listen(3000, function() {
 // before running this file and separately running json/photo.py
 // updateHeroData(pool);
 
-// updateCardData(pool, "jubilee");
+// updateCardData(pool, "ncrawler");
 
 
 

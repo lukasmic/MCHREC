@@ -1,123 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
-
 img {
   max-width: 100%;
 }
-
 * {
   font-family: 'Rubik', sans-serif;
 }
-
 .center {
   text-align: center;
   justify-content: center;
 }
-
 section, div {
   margin: 5px;
   padding: 5px;
 }
-
 footer {
-  /* background-color:#eee; */
+  background-color:#eee;
   border-top: 1px solid rgba(0,0,0,.5);
 }
-
 main {
   justify-content: center;
   margin: auto;
 }
-
 label {
   display: inline-block;
   margin: 3px;
   padding: 1px;
 }
-
 ul {
   list-style-type: none;
 }
-
 .warning {
   color: red;
 }
-
-/* 
 /* hamburger navigation */
-
-/* #smallNav #primaryNav {
+#smallNav {
+  display: flex;
   justify-content: space-between;
-} */
-
-/* #hamburgerBtn {
+}
+#hamburgerBtn {
   align-items: center;
   height: 90%;
 }
-
 nav button {
   margin: .2rem 2vw;
   background: transparent;
   border: none;
   font-size: 2rem;
-   color: #555; 
-
-  */
-
-
+  color: #555;
+}
+nav {
+  background-color:#eee;
+}
 nav ul {
   padding: 0;
   margin: 0;
 }
-
 nav ul li a, #mainLink {
   display: block;
   padding: .8rem 2vw;
   text-decoration: none;
-  /* color: #333; */
+  color: #333;
   border-top: 1px solid rgba(0,0,0,.5);
 }
-
 nav ul li.active a {
   background-color: rgba(0,0,0,0.5);
   color: #fff;
 }
-
 nav ul li a:hover, #mainLink:hover {
   background-color: rgba(0,0,0,0.3);
 }
-
 nav ul {display: none;}
 nav ul.open {display: block;}
-
 #hamburgerBtn span:nth-child(1) {display: block;}
 #hamburgerBtn span:nth-child(2) {display: none;}
-
 #hamburgerBtn.open span:nth-child(1) {display: none;}
 #hamburgerBtn.open span:nth-child(2) {display: block;}
-
 /* end hamburger navigation */
-
-
 /* hero page */
-
 #aspect, #aspect2, #history-selector, #percentage-selector, #submitBtn {
   font-weight: bold;
 }
-
 #aspect2, #packs {
   display: none;
 }
-
 #packs.open {
   display: block;
 }
-
-
 #card-results ul, #staple-results ul {
   padding: 0;
   margin: 0;
 }
-
 #card-results ul li, #staple-results ul li {
   max-width: 90%;
   border: 1px solid #000;
@@ -126,7 +98,6 @@ nav ul.open {display: block;}
   align-items: center;
   margin: 10px;
 }
-
 #card-results ul li img, #staple-results ul li img {
   /* this seems to be the smallest size of the images
   this will keep them uniform */
@@ -135,45 +106,38 @@ nav ul.open {display: block;}
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* add a slight shadow to the card */
   transition: box-shadow 0.3s ease-in-out;
   margin: 10px;
-
 }
-
 #card-results ul li img:hover, #staple-results ul li img:hover {
   box-shadow: 4px 4px 8px rgba(0,0,0,0.6); /* add a slight shadow to the card */
   transition: box-shadow 0.3s ease-in-out; /* add a transition effect to the shadow */
   transform: scale(1.02);
 }
-
 #submitBtn {
   padding: 5px 10px 5px 10px;
 }
-
 input {
   margin: 3px;
 }
-
 #hero-header ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  padding: 0px; /* Remove default padding */
+  list-style: none; /* Remove bullet points */
 }
 
 #hero-header ul li {
-  margin: 2px;
+  margin: 5px;
 }
-
 /* .hero {
   display: inline-block;
   margin: 10px;
   text-align: center;
 }
-
 .hero img {
   display: block;
   margin: auto;
   width: 237px;
 } */
-
-
 /* #hero {
   display: flex;
   flex-wrap: wrap;
@@ -183,7 +147,6 @@ input {
   
   margin: auto;
 } */
-
 #hero {
   display: flex;
   flex-wrap: wrap;
@@ -193,48 +156,37 @@ input {
   /* max-width: 90%; */
   margin: auto;
 }
-
 #hero input[type="radio"] {
   position: absolute;
   opacity: 0;
   width: 0;
   height: 0;
 }
-
 #hero label {
   display: block;
   text-align: center;
   margin: 4px; /* Adjust as needed */
   cursor: pointer;
 }
-
 #hero img {
   width: 100%; /* Adjust as needed */
   max-width: 120px; /* Adjust to suit your design */
   margin-top: 8px; /* Adjust as needed */
 }
-
 #hero div {
   border: 2px solid #CCCCCC; /* default border color */
   border-radius: 25px;
   padding: 2px;
   /* margin-bottom: 16px; space between each hero option */
 }
-
 #hero input[type="radio"]:checked + label {
   border: 5px solid #00FF00; /* border color when selected */
   padding: 1px;
   border-radius: 15px;
 }
-
 #hero-select {
   align-items: center;
   justify-content: center;
   margin: auto;
   /* max-width: 90%; */
 }
-
-
-
-
-/* end hero page */

@@ -1,5 +1,5 @@
 /* Media Query for medium+ views */
-@media only screen and (min-width: 32.5em) {
+@media only screen and (min-width: 36em) {
 
   /* hamburger */
   #smallNav {display: none;}
@@ -39,6 +39,8 @@
   #hero-header ul li{
     max-width: 90%;
   }
+
+
 
 
 

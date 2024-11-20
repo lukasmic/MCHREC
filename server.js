@@ -198,7 +198,7 @@ app.listen(3000, function() {
 // before running this file and separately running json/photo.py
 // updateHeroData(pool);
 
-// updateCardData(pool, "ncrawler");
+// updateCardData(pool, "magneto");
 
 
 

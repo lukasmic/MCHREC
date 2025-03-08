@@ -35,13 +35,14 @@ export async function ripDeckData(pool) {
     const decks = await response.json();
 
     for (const deck of decks) {
-      const { date_creation, investigator_code, slots, meta } = deck;
+      const { date_creation, hero_code, slots, meta } = deck;
+      // console.log(deck);
 
         //pull aspect from meta, if possible
         let aspect = meta && meta !== '' ? JSON.parse(meta).aspect : null;
-        if (investigator_code == '21031a') {//Adam Warlock
+        if (hero_code == '21031a') {//Adam Warlock
           aspect = 'none';
-        } else if (investigator_code == '04031a') {//Spider-Woman
+        } else if (hero_code == '04031a') {//Spider-Woman
           let aspect2 = meta && meta !== '' ? JSON.parse(meta).aspect2 : null;
           if ((aspect == null ) || (aspect2 == null)) {
             continue;
@@ -64,7 +65,7 @@ export async function ripDeckData(pool) {
         const aspect_id = aspectResults[0].aspect_id;
   
         const deckSql = `INSERT INTO decks (date_creation, master_code, aspect_id) VALUES (?, ?, ?)`;
-        const deckValues = [date_creation, investigator_code, aspect_id];
+        const deckValues = [date_creation, hero_code, aspect_id];
   
         const [insertDeckResult] = await pool.query(deckSql, deckValues);
         const decks_id = insertDeckResult.insertId;

@@ -189,6 +189,13 @@
     "alterphoto": "https://marvelcdb.com/bundles/cards/49001b.png"
   },
   {
+    "code": "50001a",
+    "heroname": "Maria Hill",
+    "alter_ego": "Maria Hill",
+    "herophoto": "https://marvelcdb.com/bundles/cards/50001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/50001b.png"
+  },
+  {
     "code": "05001a",
     "heroname": "Ms. Marvel",
     "alter_ego": "Kamala Khan",
@@ -201,6 +208,13 @@
     "alter_ego": "Nebula",
     "herophoto": "https://marvelcdb.com/bundles/cards/22001a.png",
     "alterphoto": "https://marvelcdb.com/bundles/cards/22001b.png"
+  },
+  {
+    "code": "50034a",
+    "heroname": "Nick Fury",
+    "alter_ego": "Nick Fury",
+    "herophoto": "https://marvelcdb.com/bundles/cards/50034a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/50034b.png"
   },
   {
     "code": "48001a",

@@ -11,9 +11,9 @@ import { createDatabasePool, queryWithRetry } from "./src/js/server-utils.js";
 import { startRipDeckDataInterval } from "./src/new_rips/decks.mjs";
 
 //only use these as new releases come out
-import { updatePackData } from "./src/new_rips/packs.mjs";
-import { updateCardData } from "./src/new_rips/cards.mjs";
-import { updateHeroData } from "./src/new_rips/heroes.mjs";
+// import { updatePackData } from "./src/new_rips/packs.mjs";
+// import { updateCardData } from "./src/new_rips/cards.mjs";
+// import { updateHeroData } from "./src/new_rips/heroes.mjs";
 // import { updateTraits } from "./src/new_rips/traits.mjs";
 // import { updateVillainSets } from "./src/new_rips/villains.mjs";
 
@@ -170,19 +170,6 @@ app.listen(3000, function() {
 //   });
 // }
 
-// Start the backup interval
-// function startBackupInterval() {
-//   performBackup(); // Perform initial backup upon server start
-//   const oneWeekInMilliseconds = 7 * 24 * 60 * 60 * 1000 + (10 * 60 * 1000); // Convert one week to milliseconds (add ten minutes so we're not trying it as same time as deck pulls)
-//   setInterval(performBackup, oneWeekInMilliseconds); // Schedule subsequent backups
-// }
-
-// Call this function when initializing your server
-// Comment out during new releases
-// startBackupInterval();
-
-
-
 
 
 
@@ -198,7 +185,7 @@ app.listen(3000, function() {
 // before running this file and separately running json/photo.py
 // updateHeroData(pool);
 
-// updateCardData(pool, "magneto");
+// updateCardData(pool, "aos");
 
 
 
@@ -206,63 +193,14 @@ app.listen(3000, function() {
 
 
 
-// ripDeckData(connection)
-
-// setInterval(() => {
-//   pool.query('SELECT 1', (err) => {
-//     if (err) {
-//       console.error('Error pinging database:', err);
-//     } else {
-//       console.log('Pinged database successfully.');
-//     }
-//   });
-// }, 2 * 60 * 1000);  // Ping every 2.5 minutes
-
-
-// const twoDaysAgo = new Date();
-// twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
-// const formattedDate = twoDaysAgo.toISOString().slice(0, 10);
 
 
 
-// const query = 'SELECT pack_code FROM packs';
-// connection.query(query, (error, results) => {
-//   if (error) throw error;
-//   // Loop through results and call function for each pack code
-//   results.forEach((result, index) => {
-//     const packCode = result.pack_code;
-//     // Set a timeout for each call to updateTraits
-//     setTimeout(() => {
-//       updateTraits(connection, packCode);
-//     }, index * 30000); // Delay each call by 60 seconds
-//   });
-// });
-
-
-// const query = 'SELECT pack_code FROM packs';
-// connection.query(query, (error, results) => {
-//   if (error) throw error;
-//   // Loop through results and call function for each pack code
-//   results.forEach((result, index) => {
-//     const packCode = result.pack_code;
-//     // Set a timeout for each call to updateTraits
-//     setTimeout(() => {
-//       updateVillainSets(connection, packCode);
-//     }, index * 15000); // Delay each call by 60 seconds
-//   });
-// });
 
 
 
-//here lies the gaggle of junk we need to do as new releases come out
 
 
-// updatePackData(connection);
-
-// updateCardData(connection, "angel");
-
-//also will have to manually insert new heroes into hero_names.json (probably the only JSON we're keeping)
-// updateHeroData(connection);
 
 
 //do not take this baby out of storage unless we need to repopulate the entire database

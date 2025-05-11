@@ -154,7 +154,7 @@ startRipDeckDataInterval(pool);
 
 app.listen(3000, function() {
   console.log("Server listening on port 3000");
-});
+}); 
 
 
 // Function to call the Python backup script
@@ -181,12 +181,11 @@ app.listen(3000, function() {
 
 // updatePackData(pool);
 
+// updateCardData(pool, "silk"); 
+
 // also will have to manually insert new heroes into hero_names.json (probably the only JSON we're keeping)
 // before running this file and separately running json/photo.py
 // updateHeroData(pool);
-
-// updateCardData(pool, "aos");
-
 
 
 

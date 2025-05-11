@@ -28,8 +28,15 @@
     "alterphoto": "https://marvelcdb.com/bundles/cards/45001b.png"
   },
   {
+    "code": "51001a",
+    "heroname": "Black Panther (Shuri)",
+    "alter_ego": "Shuri",
+    "herophoto": "https://marvelcdb.com/bundles/cards/51001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/51001b.png"
+  },
+  {
     "code": "01040a",
-    "heroname": "Black Panther",
+    "heroname": "Black Panther (T'Challa)",
     "alter_ego": "T'Challa",
     "herophoto": "https://marvelcdb.com/bundles/cards/01040a.png",
     "alterphoto": "https://marvelcdb.com/bundles/cards/01040b.png"
@@ -285,6 +292,13 @@
     "alter_ego": "Jennifer Walters",
     "herophoto": "https://marvelcdb.com/bundles/cards/01019a.png",
     "alterphoto": "https://marvelcdb.com/bundles/cards/01019b.png"
+  },
+  {
+    "code": "52001a",
+    "heroname": "Silk",
+    "alter_ego": "Cindy Moon",
+    "herophoto": "https://marvelcdb.com/bundles/cards/52001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/52001b.png"
   },
   {
     "code": "31001a",

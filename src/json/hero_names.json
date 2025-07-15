@@ -112,6 +112,13 @@
     "alterphoto": "https://marvelcdb.com/bundles/cards/19001b.png"
   },
   {
+    "code": "53001a",
+    "heroname": "Falcon",
+    "alter_ego": "Sam Wilson",
+    "herophoto": "https://marvelcdb.com/bundles/cards/53001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/53001b.png"
+  },
+  {
     "code": "37001a",
     "heroname": "Gambit",
     "alter_ego": "Remy Lebeau",
@@ -397,6 +404,13 @@
     "alter_ego": "Nadia van Dyne",
     "herophoto": "https://marvelcdb.com/bundles/cards/13001a.png",
     "alterphoto": "https://marvelcdb.com/bundles/cards/13001b.png"
+  },
+  {
+    "code": "54001a",
+    "heroname": "Winter Soldier",
+    "alter_ego": "Bucky Barnes",
+    "herophoto": "https://marvelcdb.com/bundles/cards/54001a.png",
+    "alterphoto": "https://marvelcdb.com/bundles/cards/54001b.png"
   },
   {
     "code": "35001a",
